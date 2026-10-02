@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthy Me Onboarding</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath fill=%27%232B1D17%27 d=%27M12 21s-8-5-8-11.2A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 8 3.2C20 16 12 21 12 21z%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF7F0; --card:#F3ECE3; --card-2:#FFFDF9; --line:#E8DFD4;
+  --ink:#2B1D17; --muted:#8C8078; --faint:#B8ADA3;
+  --dark:#2B1D17; --disabled:#B3A9A0;
+  --green:#6E8F2E; --green-bg:#EEF1DE; --warn:#E39B32; --warn-bg:#FBEBD2;
+  --page:#E9E2D8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--page);color:var(--ink);min-height:100vh;display:flex;justify-content:center;align-items:center;gap:40px;padding:32px 16px}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* phone */
+.phone{width:390px;height:800px;background:var(--bg);border-radius:48px;border:10px solid #1b1310;position:relative;overflow:hidden;box-shadow:0 30px 60px rgba(43,29,23,.25);flex-shrink:0}
+.status{height:54px;position:relative;display:flex;justify-content:space-between;align-items:center;padding:4px 30px 0 44px;z-index:3}
+.status .time{font-family:-apple-system,"SF Pro Text",Inter,sans-serif;font-size:17px;font-weight:600;letter-spacing:-.4px;width:54px;text-align:center}
+.status .icons{display:flex;align-items:center;gap:6px}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:124px;height:36px;background:#000;border-radius:20px}
+.screen{position:absolute;top:54px;left:0;right:0;bottom:0;display:flex;flex-direction:column;animation:in .28s ease}
+#app.static *{animation:none!important}
+@keyframes in{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+.top{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.top .back{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.top .title{font-size:15px;font-weight:500}
+.progress{display:flex;gap:4px;padding:0 20px 8px}
+.progress i{flex:1;height:3px;border-radius:2px;background:var(--line)}
+.progress i.on{background:var(--dark)}
+.body{flex:1;overflow-y:auto;padding:12px 20px 16px}
+.body::-webkit-scrollbar{display:none}
+h1{font-size:28px;line-height:1.2;font-weight:600;text-align:center;letter-spacing:-.3px}
+.sub{font-size:14px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.45}
+.footer{padding:12px 20px 28px}
+.cta{width:100%;height:52px;border-radius:26px;background:var(--dark);color:#fff;font-size:14px;font-weight:600;transition:.2s}
+.cta:disabled{background:var(--disabled);cursor:default}
+.ghost{width:100%;height:52px;border-radius:26px;background:rgba(118,118,128,.12);color:var(--ink);font-size:14px;font-weight:600;margin-top:10px}
+.link{display:block;text-align:center;margin-top:14px;font-size:14px;color:var(--muted);text-decoration:underline}
+
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:var(--card-2);border:1px solid var(--line);text-align:left;transition:.15s}
+.opt .ic{width:36px;height:36px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.opt .t{font-size:15px;font-weight:500}
+.opt .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+.opt .chk{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--faint);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.opt.radio.sel{border-color:var(--ink)}
+.opt.sel .chk{background:var(--dark);border-color:var(--dark)}
+.opt.off{opacity:.45;cursor:not-allowed}
+.opt .tag{font-size:11px;color:var(--warn);margin-top:3px;font-weight:500}
+
+.label{font-size:12px;font-weight:600;color:var(--muted);margin:22px 0 10px}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;height:48px;border-radius:14px;background:var(--card-2);border:1px solid var(--line);font-size:15px;font-weight:500}
+.seg button.sel{background:var(--dark);color:#fff;border-color:var(--dark)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.sub-block p{text-align:center}
+.legal{font-size:12px;line-height:1.4;color:var(--muted);text-align:center;margin-top:12px;text-wrap:pretty}
+.legal a{color:var(--ink)}
+.chip{padding:10px 14px;border-radius:20px;background:var(--card-2);border:1px solid var(--line);font-size:14px;font-weight:500}
+.chip.sel{background:var(--dark);color:#fff;border-color:var(--dark)}
+.chip.off{opacity:.4;cursor:not-allowed}
+.sub-block{margin-top:10px;padding:12px;border-radius:14px;background:var(--card);animation:in .25s ease}
+.sub-block p{font-size:13px;color:var(--muted);margin-bottom:8px}
+
+.num{display:flex;align-items:center;justify-content:space-between;background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:6px 8px 6px 16px}
+.num .v{font-size:26px;font-weight:600}
+.num .v small{font-size:14px;font-weight:500;color:var(--muted);margin-left:4px}
+.num .st{display:flex;gap:6px}
+.num .st button{width:40px;height:40px;border-radius:50%;background:var(--card);font-size:20px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row2 .num{padding:6px 6px 6px 12px}
+.row2 .num .v{font-size:22px}
+.row2 .num .st{gap:4px}
+.row2 .num .st button{width:32px;height:32px;font-size:18px}
+
+.note{border-radius:14px;padding:14px;margin-top:18px;font-size:13px;line-height:1.45;animation:in .25s ease}
+.note b{display:block;font-size:14px;margin-bottom:4px}
+.note.ok{background:var(--green-bg)}
+.note.ok b{color:var(--green)}
+.note.warn{background:var(--warn-bg)}
+.note.warn b{color:#B06F10}
+.note .fix{margin-top:10px;background:#fff;border-radius:16px;padding:8px 14px;font-size:13px;font-weight:600}
+
+.consent{margin-top:18px;padding:14px;border-radius:14px;background:var(--card);animation:in .25s ease}
+.consent .h{font-size:14px;font-weight:600;display:flex;gap:8px;align-items:center}
+.consent p{font-size:12.5px;color:var(--muted);line-height:1.45;margin:6px 0 10px}
+.consent label{display:flex;gap:10px;align-items:flex-start;font-size:13px;cursor:pointer;line-height:1.4}
+.consent input{width:18px;height:18px;accent-color:var(--dark);margin-top:1px;flex-shrink:0}
+.consent a{color:var(--ink)}
+
+.textin{width:100%;border:none;border-bottom:1px solid var(--line);background:none;font-family:inherit;font-size:28px;text-align:center;padding:14px 0;margin-top:40px;outline:none;color:var(--ink)}
+
+/* welcome */
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px;text-align:center}
+.logo{font-size:40px;font-weight:600;letter-spacing:-1px}
+.logo-sub{font-size:15px;color:var(--muted);margin-top:4px}
+.bubbles{display:grid;grid-template-columns:repeat(3,72px);gap:12px;margin:40px 0}
+.bubbles div{height:72px;border-radius:20px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:30px}
+.bubbles div:nth-child(2),.bubbles div:nth-child(5){position:relative;top:18px}
+.time-pill{display:inline-flex;gap:6px;align-items:center;background:var(--card);padding:6px 12px;border-radius:14px;font-size:12.5px;color:var(--muted);margin-top:18px}
+
+/* loading */
+.ring{width:170px;height:170px;border-radius:50%;margin:30px auto 24px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:600;position:relative}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.steps{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.steps div{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--faint);transition:.3s}
+.steps div.done{color:var(--ink)}
+.steps span{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;transition:.3s}
+.steps div.done span{background:var(--green);border-color:var(--green)}
+
+/* plan */
+.plan-card{background:var(--card-2);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:14px}
+.plan-card .k{font-size:12px;color:var(--muted);font-weight:600}
+.plan-card .big{font-size:20px;font-weight:600;margin-top:6px}
+.plan-card ul{list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.plan-card li{font-size:13.5px;line-height:1.4;display:flex;gap:8px}
+.plan-card li:before{content:"✓";color:var(--green);font-weight:700}
+.day1{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.day1:first-of-type{border-top:none}
+.day1 .img{width:52px;height:52px;border-radius:12px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:24px}
+.day1 .t{font-size:15px;font-weight:500}
+.day1 .d{font-size:12.5px;color:var(--muted)}
+
+/* notif */
+.bell{width:96px;height:96px;border-radius:50%;background:var(--warn-bg);display:flex;align-items:center;justify-content:center;font-size:42px;margin:30px auto 20px}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
+.times button{height:52px;border-radius:14px;background:var(--card-2);border:1px solid var(--line);font-size:15px;font-weight:500}
+.times button small{display:block;font-size:11px;color:var(--muted);font-weight:400}
+.times button.sel{background:var(--dark);color:#fff;border-color:var(--dark)}
+.times button.sel small{color:#cfc5bc}
+.sys{position:absolute;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:5;animation:fade .2s}
+@keyframes fade{from{opacity:0}}
+.sys-box{width:270px;background:rgba(245,242,238,.97);border-radius:14px;text-align:center;overflow:hidden}
+.sys-box h4{font-size:16px;font-weight:600;padding:18px 16px 4px}
+.sys-box p{font-size:13px;padding:0 16px 16px;color:#333}
+.sys-box div{display:flex;border-top:1px solid #ccc}
+.sys-box div button{flex:1;padding:12px;font-size:16px;color:#0A7AFF}
+.sys-box div button+button{border-left:1px solid #ccc;font-weight:600}
+
+/* save */
+.auth{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.auth button{height:52px;border-radius:26px;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.auth .apple{background:#000;color:#fff}
+.auth .mail{background:var(--card-2);border:1px solid var(--line)}
+
+/* home */
+.home-h{display:flex;justify-content:space-between;align-items:center;padding:6px 20px 0}
+.home-h h2{font-size:28px;font-weight:600}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.daybar{margin:14px 20px 0;padding:14px;border-radius:16px;background:var(--dark);color:#fff}
+.daybar .k{font-size:12px;opacity:.7}
+.daybar .big{font-size:18px;font-weight:600;margin-top:4px}
+.bar{height:6px;border-radius:3px;background:rgba(255,255,255,.2);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:#B9D46A;transition:.4s}
+.task{display:flex;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.task .cb{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--faint);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0;transition:.2s}
+.task.done .cb{background:var(--green);border-color:var(--green)}
+.task .img{width:54px;height:54px;border-radius:12px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:24px}
+.task .t{font-size:15px;font-weight:500}
+.task .d{font-size:12.5px;color:var(--muted)}
+.later{font-size:12px;color:var(--muted);font-weight:600;margin:20px 0 4px}
+.task.locked{opacity:.5;cursor:default}
+.tabbar{position:absolute;bottom:16px;left:16px;right:16px;height:60px;border-radius:30px;background:rgba(255,253,249,.95);box-shadow:0 4px 20px rgba(0,0,0,.08);display:flex;justify-content:space-around;align-items:center;font-size:10.5px;color:var(--muted)}
+.tabbar div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.tabbar div:first-child{color:var(--ink);font-weight:600}
+.tabbar span{font-size:17px}
+.toast{position:absolute;left:20px;right:20px;bottom:90px;background:var(--green);color:#fff;border-radius:14px;padding:12px 14px;font-size:13.5px;animation:in .3s;z-index:4}
+
+/* side panel */
+.panel{width:360px;flex-shrink:0}
+.panel .eyebrow{font-size:12px;color:var(--muted);font-weight:600}
+.panel h3{font-size:22px;font-weight:600;margin:6px 0 16px;line-height:1.25}
+.counter{display:flex;gap:10px;margin-bottom:20px}
+.counter div{flex:1;background:var(--bg);border-radius:14px;padding:12px}
+.counter b{font-size:24px;display:block}
+.counter small{font-size:12px;color:var(--muted)}
+.counter .new b{color:var(--green)}
+.cmp{background:var(--bg);border-radius:16px;padding:16px;margin-bottom:12px}
+.cmp .k{font-size:13px;font-weight:700;margin-bottom:6px}
+.cmp.before .k{color:#B5563B}
+.cmp.after .k{color:var(--green)}
+.cmp p{font-size:14px;line-height:1.5}
+.panel .ctrls{display:flex;gap:8px;margin-top:18px}
+.panel .ctrls button{padding:10px 14px;border-radius:20px;background:var(--bg);font-size:13px;font-weight:500}
+.panel .ctrls{align-items:center}
+.lang{display:flex;background:var(--bg);border-radius:20px;padding:3px}
+.lang-top{display:inline-flex;margin-bottom:20px}
+.panel .lang button{padding:7px 12px;border-radius:16px;background:none;font-size:12.5px;font-weight:600;color:var(--muted)}
+.panel .lang button.on{background:var(--dark);color:#fff}
+
+@media (max-width:860px){
+  body{padding:0;display:block;background:var(--bg)}
+  .panel{display:none}
+  .phone{width:100%;height:100vh;height:100dvh;border:none;border-radius:0;box-shadow:none}
+}
+.i{width:1em;height:1em;display:block;flex-shrink:0}
+.bubbles div{color:var(--ink);font-size:28px}
+.opt .ic{color:var(--ink);font-size:20px}
+.img{color:var(--ink)}
+.day1 .img,.task .img{font-size:24px}
+.bell{color:#B06F10;font-size:40px}
+.time-pill .i{font-size:14px}
+.consent .h .i{font-size:16px}
+.auth .i{font-size:20px}
+.tabbar span{font-size:20px}
+
+/* iOS segmented control */
+.ios-seg{position:relative;display:flex;height:36px;padding:2px;border-radius:10px;background:rgba(118,118,128,.12)}
+.ios-seg i{position:absolute;top:2px;bottom:2px;left:2px;width:calc(50% - 2px);border-radius:8px;background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04);transition:transform .25s cubic-bezier(.3,.7,.4,1)}
+.ios-seg[data-on="1"] i{transform:translateX(100%)}
+.ios-seg button{flex:1;position:relative;z-index:1;font-size:14px;font-weight:500;color:var(--ink)}
+.ios-seg button.on{font-weight:600}
+/* inset grouped list */
+.group{margin-top:20px;background:var(--card-2);border-radius:12px;overflow:hidden}
+.row{width:100%;min-height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px;text-align:left;position:relative}
+.row+.row:before,.wheel+.row:before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:rgba(60,60,67,.18)}
+.row .val{color:var(--muted);font-variant-numeric:tabular-nums;font-size:16px}
+.row.open .val{color:var(--ink)}
+/* wheel picker */
+.wheel{position:relative;height:180px;overflow:hidden}
+.wheel .band{position:absolute;left:8px;right:8px;top:72px;height:36px;border-radius:8px;background:rgba(118,118,128,.12);pointer-events:none}
+.wheel .wunit{position:absolute;top:72px;height:36px;line-height:36px;left:calc(50% + 34px);font-size:18px;color:var(--ink);pointer-events:none;z-index:2}
+.ws{height:180px;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;-webkit-mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent)}
+.ws::-webkit-scrollbar{display:none}
+.wpad{height:72px}
+.wi{height:36px;line-height:36px;text-align:center;font-size:21px;color:var(--faint);scroll-snap-align:center;cursor:pointer;font-variant-numeric:tabular-nums}
+.wi.sel{color:var(--ink)}
+
+.note{background:none!important;border-radius:0;padding:8px 16px 0;margin-top:0;font-size:13px;line-height:1.4;color:var(--muted);animation:none}
+.note b{display:inline;font-size:13px;font-weight:400;color:var(--muted)!important;margin:0}
+.note b:after{content:". "}
+.note .fix{display:block;width:calc(100% + 32px);margin:14px -16px 0;height:44px;padding:0 16px;text-align:left;background:var(--card-2);border-radius:12px;font-size:16px;font-weight:400;color:var(--ink)}
+
+.bmi-val{display:flex;align-items:center;gap:8px}
+.bmi-ic{font-size:20px;display:flex}
+.bmi-ic.ok{color:#5E8C2A}.bmi-ic.warn{color:#D9892B}
+/* iOS sheet */
+.sheet-wrap{position:absolute;inset:0;z-index:6}
+.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,0);transition:.3s}
+.sheet-wrap.on .sheet-bg{background:rgba(0,0,0,.3)}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;overflow-y:auto;background:var(--bg);border-radius:14px 14px 0 0;transform:translateY(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);padding-bottom:30px}
+.sheet-wrap.on .sheet{transform:none}
+.grabber{width:36px;height:5px;border-radius:3px;background:rgba(60,60,67,.3);margin:6px auto 0}
+.sheet-h{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 16px}
+.sheet-h b{font-size:17px;font-weight:600}
+.sheet-h b{text-align:center}
+.sh-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(118,118,128,.14);color:var(--ink)}
+.sh-btn .i{stroke-width:2.2}
+.sh-btn.ok{justify-self:end;background:var(--dark);color:#fff}
+.sheet-body{padding:8px 20px 0}
+.bmi-big{font-size:48px;font-weight:600;text-align:center;letter-spacing:-1px;margin-top:6px}
+.bmi-cat{text-align:center;font-size:15px;color:var(--muted);margin-top:2px}
+.scale{position:relative;display:flex;gap:2px;height:8px;margin-top:22px}
+.scale i{border-radius:4px}
+.scale .mark{position:absolute;top:-5px;width:4px;height:18px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--bg)}
+.scale-l{position:relative;height:16px;margin-top:6px;font-size:11px;color:var(--muted)}
+.scale-l span{position:absolute;transform:translateX(-50%)}
+.scale-l span:nth-child(1){left:0;transform:none}.scale-l span:nth-child(2){left:17.5%}.scale-l span:nth-child(3){left:50%}.scale-l span:nth-child(4){left:75%}.scale-l span:nth-child(5){right:0;transform:none}
+.srow{cursor:default}
+.srow span:first-child{display:flex;align-items:center;gap:10px}
+.srow .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.srow.cur span{font-weight:600;color:var(--ink)}
+.sheet-foot{font-size:13px;color:var(--muted);line-height:1.4;padding:8px 16px 0}
+.nw{white-space:nowrap}
+.sub{text-wrap:balance}
+.opt .ic-g{background:none;font-size:30px}
+.opt .trail{margin-left:auto;padding-left:12px;font-size:15px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.crow .rl{display:flex;flex-direction:column;gap:2px}
+.crow .rl small{font-size:13px;color:var(--muted)}
+.crow.dis{opacity:.35;cursor:default}
+.cbx{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--faint);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;color:#fff;transition:.15s}
+.cbx.on{background:var(--dark);border-color:var(--dark)}
+.cbx .i{stroke-width:2.6}
+.sheet-q{font-size:15px;color:var(--muted);text-align:center;margin:4px 0 16px}
+.sheet-body .row .i{color:var(--faint);font-size:18px}
+.ghost.sm{height:40px;border-radius:20px;font-size:13.5px;margin-top:12px}
+.sheet-text{font-size:15px;line-height:1.45;color:var(--ink);margin-top:10px;text-align:center;text-wrap:pretty}
+
+.sec-h{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding:0 16px;margin:24px 0 7px}
+.sec-h+.group{margin-top:0}
+.lrow{width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;text-align:left;position:relative}
+.lrow+.lrow:before{content:"";position:absolute;top:0;left:60px;right:0;height:.5px;background:rgba(60,60,67,.18)}
+.lrow .tile{width:32px;height:32px;border-radius:8px;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:var(--ink)}
+.lrow.ok .tile{background:var(--green-bg);color:var(--green)}
+.lrow.ok .tile .i{stroke-width:2.4;font-size:15px}
+.lrow .tt{flex:1;display:flex;flex-direction:column;gap:2px;font-size:16px;line-height:1.3}
+.lrow .tt small{font-size:13px;color:var(--muted);line-height:1.35}
+.lrow .trail{font-size:15px;color:var(--muted);white-space:nowrap}
+.lrow.act{min-height:48px;padding-left:60px;font-size:16px;font-weight:500;color:var(--ink)}
+.lrow.act:before{left:60px}
+.row{min-height:52px;padding:12px 16px}
+.crow{min-height:60px;padding:14px 16px}
+.crow .rl{gap:4px}
+h1{text-wrap:balance}
+.lrow{padding:14px 16px;min-height:60px}
+.lrow .tt{line-height:1.35;gap:4px;text-wrap:pretty}
+.lrow.act{min-height:52px}
+.lrow .tt{font-size:14px}
+.lrow .tt small{font-size:12px}
+.lrow .trail{font-size:13px}
+.lrow.act{font-size:14px}
+
+.week{display:grid;grid-template-columns:repeat(7,1fr);padding:10px 12px 0}
+.wd{display:flex;flex-direction:column;align-items:center;gap:6px}
+.wd small{font-size:12px;color:var(--muted);font-weight:500}
+.wd span{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-variant-numeric:tabular-nums}
+.wd.today span{font-weight:700}
+.wd.sel span{background:var(--dark);color:#fff;font-weight:600}
+.wd.past{cursor:default}.wd.past span,.wd.past small{color:var(--faint)}
+.day-label{text-align:center;font-size:15px;font-weight:600;padding:12px 0 10px;border-bottom:.5px solid rgba(60,60,67,.14);margin:0 0 4px}
+.swipe{touch-action:pan-y;user-select:none}
+.lrow.tap{cursor:pointer}
+.lrow .cbx{margin-left:8px}
+.badge{font-size:11px;font-weight:600;color:var(--green);background:var(--green-bg);padding:3px 8px;border-radius:10px;margin-right:6px}
+.opt{border:none;box-shadow:0 1px 3px rgba(43,29,23,.035)}
+.opt.radio.sel{box-shadow:0 0 0 1.5px var(--ink)}
+.body{padding-top:28px}
+.lrow .tt{gap:1px}
+.crow .rl{gap:1px}
+.body.center{display:flex;flex-direction:column}
+.body.center>*{flex-shrink:0}
+.body.center>:first-child{margin-top:auto}
+.body.center>:last-child{margin-bottom:auto}
+.body h1{max-width:300px;margin-inline:auto}
+
+/* ---------- motion ---------- */
+:root{--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.3,1.5,.6,1)}
+.screen{animation:none}
+.screen.from-right{animation:enterR .38s var(--ease) both}
+.screen.from-left{animation:enterL .38s var(--ease) both}
+@keyframes enterR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes enterL{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.screen h1{animation:up .45s var(--ease) .04s both}
+.screen .sub{animation:up .45s var(--ease) .1s both}
+.opts>*,.group>*,.sec-h,.ios-seg,.times>*,.auth>*,.bubbles>div{animation:up .45s var(--ease) both}
+.opts>*:nth-child(1),.group>*:nth-child(1){animation-delay:.14s}
+.opts>*:nth-child(2),.group>*:nth-child(2){animation-delay:.19s}
+.opts>*:nth-child(3),.group>*:nth-child(3){animation-delay:.24s}
+.opts>*:nth-child(4),.group>*:nth-child(4){animation-delay:.29s}
+.opts>*:nth-child(5),.group>*:nth-child(5){animation-delay:.34s}
+.group>*:nth-child(n+6){animation-delay:.38s}
+/* line icons draw in */
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.opt .ic .i [pathLength],.tile .i [pathLength],.bubbles .i [pathLength],.bell .i [pathLength]{stroke-dasharray:1;animation:draw .7s var(--ease) .25s both}
+/* floating welcome tiles */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.bubbles div .i{animation:float 3.6s ease-in-out infinite}
+.bubbles div:nth-child(2) .i{animation-delay:.6s}.bubbles div:nth-child(3) .i{animation-delay:1.2s}
+.bubbles div:nth-child(4) .i{animation-delay:1.8s}.bubbles div:nth-child(5) .i{animation-delay:2.4s}.bubbles div:nth-child(6) .i{animation-delay:3s}
+/* hover + press */
+.opt,.row,.lrow,.cta,.ghost,.auth button,.times button,.wd span,.sh-btn{transition:transform .18s var(--ease),background .2s,box-shadow .2s,color .2s}
+.opt:active,.row:active,.lrow.tap:active,.times button:active{transform:scale(.985)}
+.cta:not(:disabled):active,.ghost:active,.auth button:active,.sh-btn:active{transform:scale(.97)}
+.opt .ic .i{transition:transform .3s var(--spring)}
+.opt:hover .ic .i{transform:scale(1.12) rotate(-6deg)}
+/* per-icon selection micro-animations */
+@keyframes flicker{0%,100%{transform:scale(1)}25%{transform:scale(1.15,1.3) translateY(-1px)}50%{transform:scale(.95,1.05)}75%{transform:scale(1.1,1.2)}}
+@keyframes lift{0%,100%{transform:translateY(0)}40%{transform:translateY(-4px) rotate(-8deg)}70%{transform:translateY(1px)}}
+@keyframes twinkle{0%{transform:scale(1) rotate(0)}50%{transform:scale(1.3) rotate(45deg)}100%{transform:scale(1) rotate(90deg)}}
+@keyframes beat{0%,100%{transform:scale(1)}20%{transform:scale(1.28)}40%{transform:scale(.95)}60%{transform:scale(1.18)}}
+@keyframes popIc{0%{transform:scale(.7)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+#app .opt.radio.sel .ic .i{animation:popIc .45s var(--spring)!important}
+#app .opt.radio.sel .ic .ic-flame{animation:flicker .5s ease!important}
+#app .opt.radio.sel .ic .ic-dumbbell{animation:lift .5s var(--ease)!important}
+#app .opt.radio.sel .ic .ic-sparkle{animation:twinkle .5s var(--ease)!important}
+#app .opt.radio.sel .ic .ic-heart{animation:beat .6s ease!important}
+.opt.radio.sel .ic{background:var(--dark);color:#fff;transition:background .2s,color .2s}
+/* checkbox pop + check draw */
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+#app .pop{animation:pop .34s var(--spring)!important}
+#app .pop .i [pathLength]{stroke-dasharray:1;animation:draw .3s var(--ease) .08s both!important}
+/* button loading */
+@keyframes spin{to{transform:rotate(360deg)}}
+.cta.loading,.ghost.loading,.auth button.loading{color:transparent!important;position:relative;pointer-events:none}
+.cta.loading .i,.auth button.loading .i{opacity:0}
+.cta.loading:after,.auth button.loading:after{content:"";position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;border:2.2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .7s linear infinite}
+.auth .mail.loading:after{border-color:rgba(43,29,23,.2);border-top-color:var(--ink)}
+/* skeleton */
+@keyframes shimmer{from{background-position:-200px 0}to{background-position:200px 0}}
+#app .sk{display:block;border-radius:6px;background:linear-gradient(90deg,var(--card) 0,#f8f2ea 50%,var(--card) 100%);background-size:400px 100%;animation:shimmer 1s linear infinite!important}
+.tile.sk{border-radius:8px}
+.sk-l{height:12px;width:60%}
+.sk-s{height:10px;width:35%;margin-top:6px}
+/* day slide */
+#app .swipe.slide-r .group,#app .swipe.slide-r .sec-h{animation:enterR .3s var(--ease) both!important}
+#app .swipe.slide-l .group,#app .swipe.slide-l .sec-h{animation:enterL .3s var(--ease) both!important}
+.wd span{transition:background .25s var(--ease),color .25s,transform .25s var(--spring)}
+#app .wd.pop span{animation:pop .34s var(--spring)!important}
+#app .swipe.reveal .group>*{animation:up .32s var(--ease) both!important}
+#app .swipe.reveal .group>*:nth-child(2){animation-delay:.05s!important}
+#app .swipe.reveal .group>*:nth-child(3){animation-delay:.1s!important}
+#app .swipe.reveal .group>*:nth-child(4){animation-delay:.15s!important}
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+.chev{color:var(--faint);font-size:16px;margin-left:6px;display:flex}
+.lrow .trail+.cbx{margin-left:8px}
+.week-line{height:.5px;background:rgba(60,60,67,.14);margin:12px 0 4px}
+.opt.ex{cursor:pointer}
+.opt.ex .cbx{margin-left:auto}
+.opt.off-t{cursor:default}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+.stats div{background:var(--bg);border-radius:14px;padding:12px}
+.stats b{display:block;font-size:20px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats small{font-size:12px;color:var(--muted)}
+.changes{list-style:none;display:flex;flex-direction:column;background:var(--bg);border-radius:16px;padding:4px 16px}
+.changes li{padding:12px 0}
+.changes li+li{border-top:.5px solid rgba(60,60,67,.14)}
+.changes b{display:block;font-size:14px;font-weight:600;margin-bottom:3px}
+.changes p{font-size:13px;line-height:1.45;color:var(--muted)}
+.panel{width:460px}
+.load{align-items:center;text-align:center}
+.load .ring{margin:0 auto 28px}
+.step-line{height:22px;margin-top:18px;overflow:hidden;font-size:15px;color:var(--muted);max-width:300px}
+.step-line span{display:block;animation:stepIn .4s var(--ease) both;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@keyframes stepIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.step-dots{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.step-dots i{width:6px;height:6px;border-radius:3px;background:var(--line);transition:width .3s var(--ease),background .3s}
+.step-dots i.cur{width:18px;background:var(--ink)}
+.step-dots i.done{background:var(--green)}
+
+.prof{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:4px}
+.av-lg{position:relative;width:80px;height:80px;margin-bottom:14px}
+.av-lg svg{position:absolute;inset:0}
+.av-lg span{position:absolute;inset:8px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:600}
+.goal-pill{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:6px 12px 6px 10px;border-radius:16px;background:var(--card-2);font-size:14px;font-weight:600;box-shadow:0 1px 3px rgba(43,29,23,.035)}
+.goal-pill .i{font-size:16px}
+.goal-sub{font-size:13px;color:var(--muted);margin-top:8px;max-width:280px;text-wrap:balance}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px}
+.stat3 div{background:var(--card-2);border-radius:12px;padding:10px 12px}
+.stat3 small{display:block;font-size:12px;color:var(--muted)}
+.stat3 b{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat3 em{font-style:normal;font-size:12px;color:var(--muted);margin-left:2px;font-weight:500}
+.focus{display:flex;align-items:center;gap:18px;padding:16px}
+.donut{width:112px;height:112px;flex-shrink:0}
+.dn-v{font-size:20px;font-weight:600;fill:var(--ink)}
+.dn-l{font-size:8.5px;fill:var(--muted)}
+.legend{list-style:none;flex:1;display:flex;flex-direction:column;gap:8px}
+.legend li{display:flex;align-items:center;gap:8px;font-size:14px}
+.legend i{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.legend b{margin-left:auto;font-weight:600;font-variant-numeric:tabular-nums}
+.hscroll{display:flex;gap:10px;overflow-x:auto;margin:0 -20px;padding:2px 20px 4px;scroll-padding-inline:20px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.wcard{flex:0 0 140px;border-radius:14px;background:var(--card-2);overflow:hidden;scroll-snap-align:start}
+.wcard.now{box-shadow:0 0 0 1.5px var(--ink)}
+.wc-top{height:78px;position:relative;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--ink)}
+.wc-day{position:absolute;top:8px;left:10px;font-size:11px;font-weight:600;color:var(--ink);opacity:.7}
+.wc-b{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px}
+.wc-b b{font-size:13px;font-weight:600;line-height:1.3}
+.wc-b small{font-size:12px;color:var(--muted)}
+.wc-ic{display:flex;gap:6px;margin-top:6px;color:var(--muted);font-size:14px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:14px;background:var(--green-bg);color:#4E6B1E;font-size:13px;font-weight:500}
+.pill .i{font-size:13px;stroke-width:2.4}
+.prof .ghost.sm{width:auto;padding:0 16px}
+.wc-top{background-image:repeating-linear-gradient(135deg,rgba(43,29,23,.045) 0 1px,transparent 1px 9px)!important;color:rgba(43,29,23,.35)!important;font-size:26px!important}
+.wc-top .wc-day{color:var(--ink)}
+.changes li{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start}
+.num-b{width:22px;height:22px;border-radius:50%;background:var(--dark);color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px;font-variant-numeric:tabular-nums}
+.ptabs{display:flex;padding:3px;border-radius:12px;background:rgba(118,118,128,.12);margin-bottom:16px}
+.ptabs button{flex:1;padding:8px 10px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink)}
+.ptabs button.on{background:#fff;font-weight:600;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.metric{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;font-weight:500;color:var(--ink);background:var(--card);padding:3px 8px;border-radius:8px}
+.metric .i{font-size:12px}
+.pnote{font-size:12px;color:var(--muted);margin-top:10px;padding:0 4px}
+@keyframes langIn{from{opacity:0;filter:blur(6px);transform:translateY(6px)}to{opacity:1;filter:none;transform:none}}
+body.lang-swap #app .screen{animation:langIn .5s var(--ease) both!important}
+body.lang-swap .panel .ptabs,body.lang-swap .panel .stats,body.lang-swap .panel .pnote{animation:langIn .5s var(--ease) both}
+body.lang-swap .panel .changes li{animation:langIn .5s var(--ease) both}
+body.lang-swap .panel .changes li:nth-child(2){animation-delay:.04s}
+body.lang-swap .panel .changes li:nth-child(3){animation-delay:.08s}
+body.lang-swap .panel .changes li:nth-child(4){animation-delay:.12s}
+body.lang-swap .panel .changes li:nth-child(5){animation-delay:.16s}
+body.lang-swap .panel .ctrls>button{animation:langIn .5s var(--ease) .1s both}
+.panes{display:grid}
+.panes>div{grid-area:1/1;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.panes>div.off{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(4px)}
+@media (max-width:1000px){.panel{width:380px}}
+</style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <div class="status">
+    <span class="time">9:41</span>
+    <div class="island"></div>
+    <div class="icons">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="#000"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="#000"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.1-1.1A10 10 0 0 0 8 .7 10 10 0 0 0 .9 3.6L2 4.7a8.5 8.5 0 0 1 6-2.4z"/><path d="M8 5.8c1.3 0 2.5.5 3.5 1.4l1.1-1.1A6.6 6.6 0 0 0 8 4.2a6.6 6.6 0 0 0-4.6 1.9l1.1 1.1c1-.9 2.2-1.4 3.5-1.4z"/><path d="M8 9.2c.5 0 1 .2 1.3.5L8 11 6.7 9.7c.3-.3.8-.5 1.3-.5z"/></svg>
+      <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.8" fill="none" stroke="#000" stroke-opacity=".35"/><rect x="2" y="2" width="20" height="9" rx="2.5" fill="#000"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="#000" fill-opacity=".4"/></svg>
+    </div>
+  </div>
+  <div id="app"></div>
+</div>
+
+<aside class="panel">
+  <div class="lang lang-top"><button data-l="en" onclick="setLang('en')">EN</button><button data-l="ua" onclick="setLang('ua')">UA</button></div>
+  <div class="ptabs" id="ptabs"></div>
+  <div class="panes">
+  <div id="paneDesign">
+    <div class="stats">
+      <div><b>25 → 10</b><small data-i="screens"></small></div>
+      <div><b>2×</b><small data-i="fewer taps"></small></div>
+      <div><b>5 → 1</b><small data-i="consent screens"></small></div>
+    </div>
+    <ul class="changes" id="changes"></ul>
+  </div>
+  <div id="paneImpact">
+    <ul class="changes" id="impact"></ul>
+    <p class="pnote" data-i="Hypotheses to validate with an A/B test against the current flow."></p>
+  </div>
+  </div>
+  <div class="ctrls">
+    <button onclick="restart()" data-i="↺ Restart"></button><button onclick="go(-1)" data-i="← Back"></button>
+  </div>
+</aside>
+
+<script>
+/* ---------- i18n ---------- */
+let LANG='en';
+try{ if(localStorage.getItem('proto-lang')==='ua') LANG='ua'; }catch(e){}
+const UA={
+'Onboarding redesign · concept':'Редизайн онбордингу · концепт','screens before':'екранів було','screens now (adaptive)':'екранів тепер (адаптивно)','Before':'Було','After':'Стало','↺ Restart':'↺ Спочатку','← Back':'← Назад',
+'Well-being coach':'Коуч із добробуту','Here to improve your health':'Тут, щоб покращити твоє здоровʼя','Create your personalized plan that fits your body, time and health':'Створи персоналізований план під своє тіло, час і здоровʼя','Create a personalized plan that fits you':'Створи план, що підходить саме тобі','Takes about 1 minute':'Займе близько 1 хвилини','Get started':'Почати','I already have an account':'У Мене Вже Є Акаунт',
+'About you':'Про Тебе','What’s your main goal?':'Яка Твоя Головна Мета?',
+'Lose weight':'Схуднути','Drop extra pounds with ease':'Легко позбутися зайвих кілограмів','Build muscle':'Наростити мʼязи','Get lean and strong':'Стати підтягнутою і сильною','Keep fit':'Тримати форму','Stay in shape and feel great':'Бути у формі й почуватися чудово','Find self-love':'Полюбити себе','Embrace your changing body':'Прийняти своє тіло, що змінюється',
+'Next':'Далі','Tell us about your body':'Розкажи про Своє Тіло','We use this to calculate a safe calorie and workout range.':'Це потрібно, щоб розрахувати безпечну норму калорій і навантаження.',
+'Sex':'Стать','Female':'Жінка','Male':'Чоловік','Age':'Вік','years':'років','Height':'Зріст','Weight':'Вага','cm':'см','kg':'кг','min':'хв',
+'Your BMI is {b} which is normal':'Твій ІМТ {b}, це норма','Your BMI is {b}':'Твій ІМТ {b}',
+'Great starting point. We’ll use it to personalise your workouts and meals.':'Чудова стартова точка. Ми врахуємо це в тренуваннях і харчуванні.',
+'We’ll keep your plan gentle and focus on healthy habits first.':'Почнемо мʼяко й зосередимося на здорових звичках.',
+'What’s your goal weight?':'Яка Твоя Бажана Вага?','Healthy range for your height: <span class="nw">{a}–{b} kg</span>':'Здоровий діапазон для твого зросту: <span class="nw">{a}–{b} кг</span>',
+'This target is below a healthy weight':'Ця ціль нижча за здорову вагу',
+'A BMI of {b} is classified as underweight and may put your health at risk. We can’t build a plan toward it.':'ІМТ {b} — це недостатня вага, яка може зашкодити здоровʼю. Ми не можемо побудувати план до такої цілі.',
+'Set {n} kg instead':'Встановити {n} кг','Realistic goal: −{d} kg':'Реалістична ціль: −{d} кг',
+'At a safe pace of ~0.5 kg a week, that’s about {w} weeks.':'У безпечному темпі ~0,5 кг на тиждень це приблизно {w} тиж.',
+'Target is not below your current weight':'Ціль не нижча за поточну вагу','Consider “Keep fit” or “Build muscle” as your goal instead.':'Можливо, тобі краще підійде мета «Тримати форму» або «Наростити мʼязи».',
+'Health':'Здоровʼя','Anything we should adapt for?':'Що Нам Варто Врахувати?','Select all that apply':'Обери все, що стосується тебе',
+'None':'Нічого','Sensitive back':'Чутлива спина','Sensitive knees':'Чутливі коліна','Type 1 diabetes':'Діабет 1 типу','Type 2 diabetes':'Діабет 2 типу','Prenatal':'Вагітність','Postnatal':'Після пологів','Wheelchair':'Інвалідний візок','Limb loss':'Втрата кінцівки',
+'Which classes interest you?':'Які заняття тебе цікавлять?','Wheelchair fitness':'Фітнес на візку','Wheelchair cardio':'Кардіо на візку','Which type of limb loss?':'Який тип втрати кінцівки?','Upper limb':'Верхня кінцівка','Lower limb':'Нижня кінцівка',
+'Please note':'Зверни увагу','Consult your doctor before working out. We’ll keep intensity low and won’t set a calorie deficit.':'Проконсультуйся з лікарем перед тренуваннями. Ми тримаємо низьку інтенсивність і не ставимо дефіцит калорій.',
+'Your health data':'Твої дані про здоровʼя',
+'To adapt your plan for {x}, Healthy Me needs your consent to process this health data. You can withdraw it anytime in your profile.':'Щоб адаптувати план під {x}, Healthy Me потрібна твоя згода на обробку цих даних про здоровʼя. Відкликати її можна будь-коли в профілі.',
+'I agree to the processing of my health data for personalisation.':'Я погоджуюся на обробку моїх даних про здоровʼя для персоналізації.','Privacy Policy':'Політика конфіденційності','None of these':'Нічого з переліченого',
+'Weekly focus':'Фокус тижня','Your first week':'Твій перший тиждень','{m} min a day':'{m} хв на день','min/day':'хв/день','Strength':'Сила','Mobility':'Мобільність','Nutrition':'Харчування',
+'Pregnancy-safe':'Безпечно для вагітності','Mild calorie deficit':'Невеликий дефіцит','No fasting':'Без голодування','Seated workouts':'Тренування сидячи','Limb-loss adapted':'Під втрату кінцівки','Low-impact':'Щадні вправи','Low-impact for your back':'Щадні вправи для спини','Low-impact for your knees':'Щадні вправи для колін','No fasting (diabetes)':'Без голодування (діабет)','Stable blood sugar':'Стабільний цукор',
+'What changed':'Що змінилося','Product impact':'Що це дає продукту',
+'Hypotheses to validate with an A/B test against the current flow.':'Це гіпотези, які варто перевірити A/B-тестом проти поточного флоу.',
+'Lower barrier to entry':'Нижчий поріг входу','People reach their plan in about a minute, with no login wall and no guest dead end, so fewer leave before they see any value.':'Людина бачить свій план приблизно за хвилину, без стіни логіну й глухого кута в гостьовому режимі, тож менше людей іде, не побачивши цінності.','Onboarding completion rate':'Частка тих, хто завершив онбординг',
+'Faster time to value':'Швидше до цінності','The personal plan appears before sign-up, so the account request comes when people already have something to save.':'Персональний план зʼявляється до реєстрації, тож акаунт просимо тоді, коли людині вже є що зберегти.','Sign-up rate after the plan':'Конверсія в реєстрацію після плану',
+'More trust in the plan':'Більше довіри до плану','The plan follows the answers and explains every safety change, so it feels personal instead of generic.':'План відповідає відповідям і пояснює кожну зміну заради безпеки, тож відчувається персональним, а не шаблонним.','Share who tap “Start Day 1”':'Частка тих, хто натиснув «Почати День 1»',
+'Higher day-1 activation':'Вища активація в перший день','Day 1 is short and doable, partial workouts count, and new features unlock one a day.':'Перший день короткий і виконуваний, часткові тренування зараховуються, а нові функції відкриваються по одній на день.','Day-1 workout completion · D1/D7 retention':'Завершення тренування в 1-й день · утримання D1/D7',
+'More notification opt-ins':'Більше дозволів на сповіщення','Reminders are offered after the plan and tied to a chosen time, not mid-quiz.':'Нагадування пропонуємо після плану й привʼязуємо до обраного часу, а не посеред опитування.','Push opt-in rate':'Частка дозволів на пуші',
+'Cut the number of taps':'Зменшили кількість тапів','Single-choice answers open the next screen on tap, with no separate Next button.':'Відповідь з одним варіантом одразу відкриває наступний екран, без окремої кнопки «Далі».',
+'Lowered the barrier to entry':'Спростили вхід','Removed the login form and Terms checkbox from the first screen. People start the quiz right away and create an account after they see their plan.':'Прибрали з першого екрана форму входу й галочку з умовами. Людина одразу починає опитування, а акаунт створює після того, як побачила свій план.',
+'Cut the quiz from 25 to 10 screens':'Скоротили опитування з 25 до 10 екранів','Merged sex, age, height and weight into one screen and moved detailed questions into the app.':'Обʼєднали стать, вік, зріст і вагу в один екран, а детальні питання перенесли в застосунок.',
+'Replaced 5 consent screens with one line':'Замінили 5 екранів згоди одним рядком','One line under the Next button on the health screen covers consent for all health data.':'Один рядок під кнопкою «Далі» на екрані здоровʼя покриває згоду на всі дані про здоровʼя.',
+'Moved pickers under the field they change':'Перенесли вибір під поле, яке він змінює','Before, a wheel at the bottom of the screen changed a value at the top. Now the wheel opens right under the tapped row.':'Раніше барабан унизу екрана змінював значення вгорі. Тепер барабан відкривається одразу під рядком, на який натиснули.','screens':'екранів','fewer taps':'менше тапів','consent screens':'екранів згоди',
+'Tap once, move on':'Один тап — і далі','Single-choice questions advance on tap. No more select, then confirm with Next.':'Питання з одним варіантом переходять далі одразу після тапу. Більше не треба обирати, а потім ще й тиснути «Далі».',
+'A clear way in':'Зрозумілий вхід','Before, login fields stayed disabled until a Terms checkbox was ticked, and “Continue as guest” → “Not now” looped back to the start. Now value comes first and the account is offered at the end.':'Раніше поля входу були неактивні, доки не поставиш галочку з умовами, а «Продовжити як гість» → «Не зараз» повертало на старт. Тепер спершу цінність, а акаунт пропонуємо в кінці.',
+'Only what the plan needs':'Лише те, що потрібно для плану','Detailed questions move into the app and are asked when they become relevant.':'Детальні питання переїхали в застосунок і ставляться тоді, коли стають доречними.',
+'One consent line':'Один рядок згоди','Three duplicate health-data screens became one sentence under the Next button.':'Три однакові екрани про обробку даних здоровʼя стали одним реченням під кнопкою «Далі».',
+'Cause above, effect below':'Причина зверху, наслідок знизу','Before, a wheel at the bottom changed a value at the top. Now each picker opens right under the row it changes.':'Раніше барабан унизу змінював значення вгорі. Тепер кожен вибір відкривається одразу під рядком, який він змінює.',
+'Warm-up':'Розминка','Squats':'Присідання','Glute bridge':'Сідничний місток','Push-ups on knees':'Віджимання з колін','Cool-down stretch':'Заминка й розтяжка','Neck & shoulder rolls':'Оберти шиєю й плечима','Cat-cow':'Кішка-корова','Hip opener':'Розкриття стегон','Hamstring stretch':'Розтяжка задньої поверхні стегна','Dead bug':'Мертвий жук','Bird dog':'Пташка-собака','Side plank':'Бічна планка','Balance hold':'Утримання балансу','Seated warm-up':'Розминка сидячи','Arm circles':'Кола руками','Band rows':'Тяга з резинкою','Chest press':'Жим від грудей','Seated stretch':'Розтяжка сидячи','Core bracing':'Стабілізація корпусу','Single-arm band row':'Тяга однією рукою','Balance drill':'Вправа на баланс','Breathing':'Дихання','Side-lying leg lifts':'Підйоми ноги лежачи на боці','Pelvic tilts':'Нахили таза','Relax':'Розслаблення',
+'We Know What You’re Thinking':'Ми знаємо, про що ти думаєш','Stop Them Before They Stop You':'Зупини їх, поки вони не зупинили тебе','Chapter {c}: part {p}':'Розділ {c}: частина {p}','Breakfast':'Сніданок','Dinner':'Вечеря','Start 12:12 fast':'Почати голодування 12:12',
+'{m} min · {k} exercises':'{m} хв · {k} вправ','{m} min · {k} steps':'{m} хв · {k} кроки','Start Workout':'Почати Тренування','Start Reading':'Почати Читання','Start':'Почати','Opens on day {n}':'Відкриється на {n}-й день','New':'Нове','Day complete':'День виконано','{d} of {n} done':'{d} з {n} виконано','Day {n} of your plan':'День {n} твого плану',
+'We introduce one new feature a day, so nothing feels overwhelming.':'Додаємо по одній новій функції на день, щоб нічого не перевантажувало.',
+'Partial workouts count. Swipe to see what’s next.':'Часткові тренування зараховуються. Гортай, щоб побачити, що далі.',
+'Mobility & stretch':'Мобільність і розтяжка','Core & balance':'Корпус і баланс','Workout':'Тренування','Today’s recipes':'Рецепти на сьогодні','Log how you feel':'Відміть самопочуття','Your 12:12 window':'Твоє вікно 12:12','Mindset · chapter {c}':'Мислення · розділ {c}','Day 1':'День 1','{m} min total':'разом {m} хв','Beginner':'Початковий рівень','Read':'Читання',
+'Select all that apply. We’ll adapt your workouts and meals to them.':'Обери все, що стосується тебе. Ми адаптуємо під це тренування й харчування.',
+'Adapted for pregnancy: gentle pace and no calorie deficit.':'Адаптовано під вагітність: мʼякий темп і без дефіциту калорій.',
+'Keep weight loss goal':'Залишити Мету Схуднути','Keep adapted plan':'Залишити Адаптований План','Weight loss goal':'Мета схуднути',
+'Gentle pace · mild calorie deficit':'Мʼякий темп · невеликий дефіцит калорій',
+'Gentle workouts and nourishing meals for pregnancy & postpartum':'Мʼякі тренування й поживне харчування під вагітність і після пологів',
+'Gentle workouts and a mild calorie deficit for pregnancy & postpartum':'Мʼякі тренування й невеликий дефіцит калорій під вагітність і після пологів',
+'During pregnancy and after birth, your body needs extra energy. That’s why we suggest a plan without calorie restriction.':'Під час вагітності й після пологів тілу потрібно більше енергії. Тому ми пропонуємо план без обмеження калорій.',
+'If you still want to lose weight, we’ll keep the pace gentle and the deficit mild. We recommend discussing it with your doctor.':'Якщо ти все ж хочеш схуднути, ми залишимо мʼякий темп і невеликий дефіцит. Радимо обговорити це з лікарем.','Diabetes':'Діабет','Pregnancy':'Вагітність або після пологів','Which type of diabetes?':'Який тип діабету?','What applies to you?':'Що з цього про тебе?',
+'By tapping Next, you agree that Healthy Me may process your health data to personalise your plan. You can withdraw consent anytime in your profile.':'Натискаючи «Далі», ти погоджуєшся, що Healthy Me оброблятиме твої дані про здоровʼя для персоналізації плану. Відкликати згоду можна будь-коли в профілі.',
+'Your plan':'Твій План','What should your plan include?':'Що Має Бути у Твоєму Плані?','You can change this anytime':'Це можна змінити будь-коли',
+'Workouts':'Тренування','Short sessions adapted to you':'Короткі заняття під тебе','Meal plan':'План харчування','Simple recipes for your goal':'Прості рецепти під твою мету','Mindset':'Мислення','3-minute daily psychology reads':'3-хвилинні щоденні тексти з психології','Cycle tracking':'Трекер циклу','Sync workouts with your cycle':'Тренування в ритмі твого циклу','Fasting':'Голодування','Guided intermittent fasting':'Інтервальне голодування з супроводом',
+'Not recommended with your health profile':'Не рекомендовано з твоїм станом здоровʼя','Paused during pregnancy & postpartum':'На паузі під час вагітності й після пологів',
+'How much time can you give each day?':'Скільки Часу на День у Тебе Є?','We’ll build day 1 around this, so it’s always doable.':'Побудуємо перший день під цей час, щоб його точно вдалося виконати.',
+'Just a little':'Зовсім трохи','Perfect for busy days':'Для зайнятих днів','A short session':'Коротке заняття','Most popular':'Найпопулярніше','A proper workout':'Повноцінне тренування','Steady progress':'Стабільний прогрес','I’m ready for more':'Хочу більше','Faster results':'Швидший результат',
+'Almost there':'Майже Готово','What should we call you?':'Як до Тебе Звертатися?','Your name':'Твоє імʼя','Create my plan':'Створити Мій План',
+'Adapting to your goal: {g}':'Адаптуємо під мету: {g}','Checking your health profile':'Перевіряємо профіль здоровʼя','Adjusting for {x}':'Враховуємо: {x}','Fitting workouts into {m} min a day':'Вписуємо тренування в {m} хв на день','Selecting recipes & first steps':'Підбираємо рецепти й перші кроки',
+'{n}, we’re creating your plan':'{n}, Створюємо Твій План','We’re creating your plan':'Створюємо Твій План',
+'No calorie deficit and low intensity (pre/postnatal)':'Без дефіциту калорій, низька інтенсивність (вагітність / після пологів)','Fasting turned off for your health profile':'Голодування вимкнено з огляду на здоровʼя',
+'Seated workouts only · {w}':'Лише тренування сидячи · {w}','Exercises adapted for limb loss · {l}':'Вправи, адаптовані під втрату кінцівки · {l}','Low-impact moves · {x}':'Щадні вправи · {x}','Meals balanced for stable blood sugar':'Харчування для стабільного рівня цукру',
+'{a} → {b} kg in ~{w} weeks':'{a} → {b} кг за ~{w} тиж.','Strength focus · protein-forward meals':'Фокус на силі · більше білка','Stay active · balanced meals':'Активність · збалансоване харчування','Gentle movement · mindset first':'Мʼякий рух · спершу мислення',
+'Seated upper body':'Верх тіла сидячи','Adaptive strength':'Адаптивна сила','Gentle prenatal flow':'Мʼякий комплекс для вагітних','Strength starter':'Силовий старт','Full body starter':'Старт на все тіло',
+'{n}, your plan is ready':'{n}, Твій План Готовий','Built around your answers':'Складено за твоїми відповідями','Your goal':'Твоя мета','Stay active & healthy':'Активність і здоровʼя',
+'Weight loss is paused during pregnancy & postpartum. We’ll revisit it with you later.':'Схуднення на паузі під час вагітності й після пологів. Повернемося до цього разом пізніше.',
+'Adapted for you':'Адаптовано під тебе','Day 1 · {m} min total':'День 1 · разом {m} хв','{m} min · beginner':'{m} хв · початковий рівень','Start with your mind':'Почни з мислення','3 min read':'3 хв читання','Start day 1':'Почати День 1',
+'When should we remind you?':'Коли Тобі Нагадати?','People with a set workout time are 80% more likely to reach their goal. One reminder a day, no spam.':'Люди з фіксованим часом тренувань на 80% частіше досягають мети. Одне нагадування на день, без спаму.',
+'Morning':'Ранок','Lunch':'Обід','Evening':'Вечір','Remind me':'Нагадувати','Not now':'Не Зараз',
+'Save your plan':'Збережи Свій План','Keep your answers and progress safe across devices. It takes 5 seconds.':'Відповіді й прогрес будуть у безпеці на всіх пристроях. Це займе 5 секунд.','Continue with Apple':'Продовжити з Apple','Continue with email':'Продовжити з Email','Maybe later':'Можливо, Пізніше',
+'Today':'Сьогодні','Day 1 of your plan':'День 1 твого плану','Day 1 complete':'День 1 виконано','{d} of 2 done · {m} min':'{d} з 2 виконано · {m} хв','{m} min · partial sessions count':'{m} хв · часткове виконання зараховується',
+'Unlocks tomorrow':'Відкриється завтра','Introduced on day 2 · one thing at a time':'Зʼявиться на 2-й день · по одному кроку','Great start, {n}! Come back tomorrow for day 2.':'Чудовий старт, {n}! Повертайся завтра на день 2.',
+'BMI':'ІМТ','Body Mass Index':'Індекс Маси Тіла','Done':'Готово','Underweight':'Недостатня вага','Normal':'Норма','Overweight':'Надлишкова вага','Obesity':'Ожиріння',
+'BMI is weight in kilograms divided by height in meters squared.':'ІМТ — це вага в кілограмах, поділена на квадрат зросту в метрах.',
+'It doesn’t account for muscle mass, age or body shape, so we use it only as a starting point for your plan.':'Він не враховує мʼязову масу, вік і статуру, тому ми використовуємо його лише як відправну точку для плану.',
+'Plan':'План','Progress':'Прогрес','More':'Більше',
+'“Healthy Me” Would Like to Send You Notifications':'Програма «Healthy Me» хоче надсилати вам сповіщення','Daily reminder at {t}':'Щоденне нагадування о {t}','Don’t Allow':'Не дозволяти','Allow':'Дозволити'
+};
+const EN={
+'Keep weight loss goal':'Keep Weight Loss Goal','Keep adapted plan':'Keep Adapted Plan',
+'Pregnancy':'Pregnancy or postpartum',
+'Get started':'Get Started','I already have an account':'I Already Have an Account','About you':'About You','What’s your main goal?':'What’s Your Main Goal?',
+'Tell us about your body':'Tell Us About Your Body','What’s your goal weight?':'What’s Your Goal Weight?','Set {n} kg instead':'Set {n} kg Instead',
+'Anything we should adapt for?':'Anything We Should Adapt For?','Your plan':'Your Plan','What should your plan include?':'What Should Your Plan Include?',
+'How much time can you give each day?':'How Much Time Can You Give Each Day?','Almost there':'Almost There','What should we call you?':'What Should We Call You?',
+'Create my plan':'Create My Plan','{n}, we’re creating your plan':'{n}, We’re Creating Your Plan','We’re creating your plan':'We’re Creating Your Plan',
+'{n}, your plan is ready':'{n}, Your Plan Is Ready','Start day 1':'Start Day 1','When should we remind you?':'When Should We Remind You?',
+'Remind me':'Remind Me','Not now':'Not Now','Save your plan':'Save Your Plan','Continue with Apple':'Continue With Apple','Continue with email':'Continue With Email','Maybe later':'Maybe Later'
+};
+const L=(s,v={})=>{let r=(LANG==='ua'?UA[s]:EN[s])||s;if(LANG==='ua')r=r.replace(/(^|[\s(«])([увзіаоУВЗІАО])\s/g,'$1$2\u00a0');for(const k in v)r=r.split('{'+k+'}').join(v[k]);return r;};
+function setLang(l){if(l===LANG)return;LANG=l;document.body.classList.remove('lang-swap');void document.body.offsetWidth;document.body.classList.add('lang-swap');clearTimeout(window._lsT);window._lsT=setTimeout(()=>document.body.classList.remove('lang-swap'),700);try{localStorage.setItem('proto-lang',l);}catch(e){}document.documentElement.lang=l==='ua'?'uk':'en';render();}
+
+const S = {
+  done:{}, detail:null,
+  goal:null, sex:'Female', age:35, height:164, weight:66, target:61, open:null,
+  health:[], wheel:null, limb:null, consent:false,
+  include:['Workouts','Meal plan'], minutes:10, name:'', notif:null, tasks:{}
+};
+const HEALTH_SENSITIVE = ['Prenatal','Postnatal','Type 1 diabetes','Type 2 diabetes','Wheelchair','Limb loss','Sensitive back','Sensitive knees'];
+const bmi = (w,h)=> w/((h/100)**2);
+const minHealthy = ()=> Math.ceil(18.5*((S.height/100)**2)*10)/10;
+const isPreg = ()=> S.health.some(h=>h==='Prenatal'||h==='Postnatal');
+const fastingBlocked = ()=> isPreg() || S.health.includes('Type 1 diabetes');
+const needsTarget = ()=> S.goal==='Lose weight' && !isPreg();
+
+/* ---------- flow (adaptive) ---------- */
+function flow(){
+  const f=['welcome','goal','body'];
+  if(needsTarget()) f.push('target');
+  f.push('health','include','time','name','loading','plan','notif','save','home');
+  return f;
+}
+let curKey='welcome';
+const cur=()=>curKey;
+let DIR=1;
+function go(d){ DIR=d<0?-1:1; document.querySelector('.sheet-wrap')?.remove(); const f=flow(); const i=Math.max(0,Math.min(f.length-1,f.indexOf(curKey)+d)); curKey=f[i]; render(); }
+function restart(){ Object.assign(S,{goal:null,health:[],wheel:null,limb:null,consent:false,include:['Workouts','Meal plan'],minutes:10,name:'',notif:null,tasks:{},done:{},detail:null,day:0,minPicked:false,pregOverride:false,sex:'Female',age:35,height:164,weight:66,target:61,open:null}); curKey='welcome'; render(); }
+
+/* ---------- side notes ---------- */
+const NOTES={
+  en:{
+  welcome:{t:'Value First, Login Later',b:'Login form + Terms checkbox on the very first screen, before the user understands what they get.',a:'One clear promise and a time estimate (“~1 min”). Account creation moves to the end, when there is a plan worth saving.'},
+  goal:{t:'Goal Drives Everything After',b:'Goal was collected but ignored: “Build muscle” produced a weight-loss plan with a calorie deficit.',a:'The goal changes the path: target weight is only asked for weight loss, and the plan summary repeats the goal back to the user.'},
+  body:{t:'3 Screens → 1',b:'Sex, birthday, height and weight on separate screens. Fields showed “0 cm / 0 kg” while the wheel showed 165, with NEXT disabled until scrolling.',a:'One screen built from native iOS controls: segmented control, inset grouped list and an inline wheel picker. Average values for the selected sex are pre-filled, and BMI updates live. Nothing looks broken, nothing blocks.'},
+  target:{t:'Guardrail That Actually Guards',b:'Modal + inline warning, but an underweight target (50 kg) was still accepted and the plan was built toward it.',a:'An unhealthy target can’t be submitted: a caption under the picker explains why, and the user simply adjusts the wheel. Shown only when the goal is weight loss.'},
+  health:{t:'5 Consent Screens → 1 Inline Consent',b:'Separate “Health Data Processing” screen for each condition (3 in a row), plus follow-up screens for wheelchair and limb loss, plus 2 more for the cycle tracker later.',a:'A native checklist instead of screens. Follow-up questions (wheelchair classes, limb type) open in a bottom sheet only when that row is tapped. One static consent line under the Next button covers all health data. No extra screens, no extra checkbox.'},
+  include:{t:'Conflict Check Before Plan',b:'Prenatal user was offered 16:8 fasting and a calorie deficit. Contradictions were never checked.',a:'Options that conflict with the health profile are simply not offered, so the user can’t pick something unsafe and doesn’t have to parse why it’s greyed out.'},
+  time:{t:'Realistic Daily Goal',b:'Day goal “500 kcal of workouts” with 8-min / 25-kcal workouts, which means 20 workouts a day.',a:'The user chooses a time budget. Day 1 goal = one workout of that length, measured in minutes, not kcal.'},
+  name:{t:'Personalisation That Sticks',b:'Name was entered, but the app still said “Hi Name!” and the profile showed “Name”.',a:'The name is used right away in the loading and plan screens, so the user sees it was heard.'},
+  loading:{t:'Labor Illusion, Kept',b:'“Creating your plan” worked well.',a:'Kept, but the steps now mirror the user’s actual answers.'},
+  plan:{t:'“We Heard You” Moment',b:'Generic weight chart; the plan contradicted the answers; no explanation of adjustments.',a:'The plan restates goal, time and health profile, and explains every adjustment. Nothing is silently blocked: the user can keep their original goal after an informed choice. This is where trust is earned.'},
+  notif:{t:'Permission After Value',b:'Push permission requested mid-quiz (screen ~8), before any value; re-asked after a workout exit.',a:'Asked after the plan, framed as “remind me about my plan”, with a time picker. The system dialog only follows a soft yes.'},
+  save:{t:'Save Progress at Peak Investment',b:'Guest mode with no prompt to save; 10 minutes of answers lost on reinstall.',a:'Offered right after the plan, when the user has the most to lose. “Later” is always available.'},
+  home:{t:'Day 1 Is Winnable',b:'6 tasks on day one; some auto-completed just by opening a screen; exiting a workout lost all progress.',a:'A week strip like Apple Calendar: swipe to see what’s next. Day 1 has two real tasks, partial workouts count, and one new feature is added per day instead of 5 intro carousels at once.'}
+  },
+  ua:{
+  welcome:{t:'Спершу Цінність, Потім Логін',b:'Форма входу й галочка з умовами на першому ж екрані, ще до того, як людина зрозуміла, що отримає.',a:'Одна чітка обіцянка й оцінка часу («~1 хв»). Створення акаунта перенесено в кінець, коли вже є план, який варто зберегти.'},
+  goal:{t:'Мета Визначає Все Подальше',b:'Мету збирали, але ігнорували: «Наростити мʼязи» давало план схуднення з дефіцитом калорій.',a:'Мета змінює шлях: бажану вагу питаємо лише для схуднення, а підсумок плану повторює мету користувачу.'},
+  body:{t:'3 Екрани → 1',b:'Стать, дата народження, зріст і вага на окремих екранах. Поля показували «0 см / 0 кг», хоча барабан стояв на 165, а NEXT була неактивна до прокрутки.',a:'Один екран із нативних iOS-контролів: сегментований перемикач, згрупований список і вбудований барабан. Середні значення для обраної статі підставляються автоматично, ІМТ оновлюється наживо. Нічого не виглядає зламаним і нічого не блокує.'},
+  target:{t:'Запобіжник, Який Справді Працює',b:'Модалка + попередження, але ціль із недостатньою вагою (50 кг) все одно приймалась, і план будувався під неї.',a:'Нездорову ціль неможливо відправити: підпис під барабаном пояснює чому, і людина просто докручує значення. Екран показується лише при меті «схуднути».'},
+  health:{t:'5 Екранів Згоди → 1 Вбудована Згода',b:'Окремий екран «Health Data Processing» для кожного стану (3 поспіль), плюс екрани-уточнення для візка й втрати кінцівки, плюс ще 2 для трекера циклу пізніше.',a:'Нативний список із чекбоксами замість окремих екранів. Уточнення (заняття на візку, тип втрати кінцівки) відкриваються в bottom sheet лише після тапу на цей рядок. Один статичний рядок згоди під кнопкою «Далі» охоплює всі дані про здоровʼя. Без зайвих екранів і чекбоксів.'},
+  include:{t:'Перевірка Суперечностей до Плану',b:'Вагітній користувачці пропонували голодування 16:8 і дефіцит калорій. Суперечності ніхто не перевіряв.',a:'Опції, що суперечать профілю здоровʼя, просто не пропонуються: людина не може обрати щось небезпечне й не мусить розбиратися, чому пункт неактивний.'},
+  time:{t:'Реалістична Денна Ціль',b:'Ціль дня «500 ккал тренувань» при тренуваннях 8 хв / 25 ккал — це 20 тренувань на день.',a:'Користувач обирає, скільки часу має. Ціль першого дня — одне тренування такої тривалості, у хвилинах, а не ккал.'},
+  name:{t:'Персоналізація, що Працює',b:'Імʼя ввели, але застосунок писав «Hi Name!», а в профілі стояло «Name».',a:'Імʼя одразу використовується на екранах завантаження й плану, тож людина бачить, що її почули.'},
+  loading:{t:'Ілюзію Роботи Збережено',b:'Екран «Creating your plan» працював добре.',a:'Залишили, але кроки тепер відображають реальні відповіді користувача.'},
+  plan:{t:'Момент «Ми Тебе Почули»',b:'Шаблонний графік ваги; план суперечив відповідям; жодних пояснень змін.',a:'План повторює мету, час і профіль здоровʼя та пояснює кожну зміну. Нічого не блокується мовчки: людина може залишити свою мету після усвідомленого вибору. Саме тут заробляється довіра.'},
+  notif:{t:'Дозвіл після Цінності',b:'Дозвіл на пуші просили посеред опитування (~8-й екран), до будь-якої цінності; повторно — після виходу з тренування.',a:'Просимо після плану як «нагадуй мені про мій план», з вибором часу. Системний діалог — лише після мʼякого «так».'},
+  save:{t:'Зберегти Прогрес у Момент Найбільших Вкладень',b:'Гостьовий режим без пропозиції зберегтися; 10 хвилин відповідей губляться при перевстановленні.',a:'Пропонуємо одразу після плану, коли людині найбільше є що втрачати. «Пізніше» завжди доступне.'},
+  home:{t:'Перший День Можна Виграти',b:'6 задач у перший день; деякі позначались виконаними просто за відкриття екрана; вихід із тренування обнуляв прогрес.',a:'Тижнева стрічка як у Календарі Apple: гортай, щоб побачити, що далі. У перший день дві справжні задачі, часткові тренування зараховуються, а нові функції додаються по одній на день замість 5 вступних каруселей одразу.'}
+  }
+};
+
+
+/* ---------- icons (inline SVG, no emoji) ---------- */
+const I={
+  dumbbell:'<path d="M6.5 7v10M3.5 9.5v5M17.5 7v10M20.5 9.5v5M6.5 12h11"/>',
+  bowl:'<path d="M4 11.5h16a8 8 0 0 1-16 0z"/><path d="M9 8c.2-1.8 1.3-3 3-3.3M13.5 8.5c.6-2 2-3.2 4-3.4"/>',
+  yoga:'<circle cx="12" cy="5" r="2"/><path d="M12 8.5v4.5M6.5 10.5 12 13l5.5-2.5M5 18.5c2.2-1.3 4.6-2 7-2s4.8.7 7 2"/>',
+  drop:'<path d="M12 3.5s6 6.4 6 10.7a6 6 0 0 1-12 0C6 9.9 12 3.5 12 3.5z"/>',
+  bulb:'<path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
+  moon:'<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/>',
+  flame:'<path d="M12 3c.8 3.2 5 5 5 10a5 5 0 0 1-10 0c0-2.2 1-3.8 2.3-4.8.1 1.8 1 2.8 2.2 3C10.8 8.6 11 5.6 12 3z"/>',
+  sparkle:'<path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 16v4M16.5 18h4"/>',
+  heart:'<path d="M12 19.5s-7-4.3-7-9.8A3.9 3.9 0 0 1 12 7.4a3.9 3.9 0 0 1 7 2.3c0 5.5-7 9.8-7 9.8z"/>',
+  cycle:'<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 8 8"/><circle cx="12" cy="12" r="2.5"/>',
+  timer:'<circle cx="12" cy="13" r="7.5"/><path d="M12 13V9.5M10 2.8h4"/>',
+  bell:'<path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+  cloud:'<path d="M7 18.5a4.5 4.5 0 0 1-.6-9A6 6 0 0 1 18 9.2a4.7 4.7 0 0 1-.5 9.3z"/><path d="M12 11v5.5M9.5 13.5 12 11l2.5 2.5"/>',
+  lock:'<rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>',
+  mail:'<rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4 7.5 8 5.5 8-5.5"/>',
+  apple:'<path fill="currentColor" stroke="none" d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.7zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/>',
+  plan:'<rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/>',
+  bars:'<path d="M6 20v-6M12 20V8M18 20V4"/>',
+  play:'<rect x="3.5" y="5" width="17" height="14" rx="3"/><path d="M10.5 9.5v5l4-2.5z"/>',
+  checkCircle:'<circle cx="12" cy="12" r="9"/><path d="m8.3 12.3 2.5 2.5 4.9-5.2"/>',
+  alertCircle:'<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.2"/><path d="M12 16.2v.1"/>',
+  chev:'<path d="m9.5 6 6 6-6 6"/>',
+  image:'<rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="m20.5 16-4.5-4.5-7.5 7.5"/>',
+  x:'<path d="M7 7l10 10M17 7 7 17"/>',
+  check:'<path d="m5.5 12.5 4.2 4.2 8.8-9.4"/>',
+  grid:'<rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/>'
+};
+const gauge=f=>{const c=2*Math.PI*9;return `<svg class="i" viewBox="0 0 24 24" fill="none" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity=".15" stroke-width="3"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="3" stroke-dasharray="${(c*f).toFixed(2)} ${c.toFixed(2)}" transform="rotate(-90 12 12)"/></svg>`;};
+const ic=n=>`<svg class="i ic-${n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${I[n].replace(/<(path|circle|rect)(?![^>]*stroke="none")/g,'<$1 pathLength="1"')}</svg>`;
+
+let PANEL='design';
+const IMPACT=[
+  ['Lower barrier to entry','People reach their plan in about a minute, with no login wall and no guest dead end, so fewer leave before they see any value.','Onboarding completion rate'],
+  ['Faster time to value','The personal plan appears before sign-up, so the account request comes when people already have something to save.','Sign-up rate after the plan'],
+  ['More trust in the plan','The plan follows the answers and explains every safety change, so it feels personal instead of generic.','Share who tap “Start Day 1”'],
+  ['Higher day-1 activation','Day 1 is short and doable, partial workouts count, and new features unlock one a day.','Day-1 workout completion · D1/D7 retention'],
+  ['More notification opt-ins','Reminders are offered after the plan and tied to a chosen time, not mid-quiz.','Push opt-in rate']
+];
+const CHANGES=[
+  ['Cut the number of taps','Single-choice answers open the next screen on tap, with no separate Next button.'],
+  ['Lowered the barrier to entry','Removed the login form and Terms checkbox from the first screen. People start the quiz right away and create an account after they see their plan.'],
+  ['Cut the quiz from 25 to 10 screens','Merged sex, age, height and weight into one screen and moved detailed questions into the app.'],
+  ['Replaced 5 consent screens with one line','One line under the Next button on the health screen covers consent for all health data.'],
+  ['Moved pickers under the field they change','Before, a wheel at the bottom of the screen changed a value at the top. Now the wheel opens right under the tapped row.']
+];
+/* ---------- helpers ---------- */
+const topBar=(title='',showBack=true)=>`
+  <div class="top"><button class="back" onclick="go(-1)" style="visibility:${showBack?'visible':'hidden'}">←</button><div class="title">${L(title)}</div><div style="width:32px"></div></div>`;
+function prog(){
+  const quiz=flow().filter(s=>!['welcome','loading','plan','notif','save','home'].includes(s));
+  const i=quiz.indexOf(cur());
+  return `<div class="progress">${quiz.map((_,k)=>`<i class="${k<=i?'on':''}"></i>`).join('')}</div>`;
+}
+const opt=(icon,t,d,sel,on,extra='',radio=false)=>`<button class="opt ${sel?'sel':''} ${radio?'radio':''} ${extra}" onclick="${on}"><div class="ic">${icon}</div><div><div class="t">${t}</div>${d?`<div class="d">${d}</div>`:''}</div>${radio?'':`<div class="chk">${sel?'✓':''}</div>`}</button>`;
+function pick(k,v){S[k]=v;render();setTimeout(()=>go(1),480);}
+const footer=(label,enabled=true,action='go(1)',extra='')=>`<div class="footer"><button class="cta" ${enabled?'':'disabled'} onclick="${action}">${L(label)}</button>${extra}</div>`;
+const AVG={Female:{age:35,height:164,weight:66},Male:{age:35,height:178,weight:82}};
+function setSex(x){ if(S.sex===x)return; S.sex=x; Object.assign(S,AVG[x]); S.target=S.weight-5; render(); }
+const segCtl=()=>`<div class="ios-seg" data-on="${S.sex==='Male'?1:0}"><i></i>${['Female','Male'].map(x=>`<button class="${S.sex===x?'on':''}" onclick="setSex('${x}')">${L(x)}</button>`).join('')}</div>`;
+const RANGE={age:[16,90,'years'],height:[130,210,'cm'],weight:[35,200,'kg'],target:[35,200,'kg']};
+function wheel(key){
+  const [min,max,unit]=RANGE[key];let items='';
+  for(let v=min;v<=max;v++)items+=`<div class="wi ${v===S[key]?'sel':''}" onclick="this.parentNode.scrollTo({top:${(v-min)*36},behavior:'smooth'})">${v}</div>`;
+  return `<div class="wheel"><div class="band"></div><div class="wunit">${L(unit)}</div><div class="ws" data-key="${key}" onscroll="onWheel(this)"><div class="wpad"></div>${items}<div class="wpad"></div></div></div>`;
+}
+const row=(key,label)=>`<button class="row ${S.open===key?'open':''}" onclick="S.open=S.open==='${key}'?null:'${key}';render()"><span>${L(label)}</span><span class="val" data-val="${key}">${S[key]} ${L(RANGE[key][2])}</span></button>${S.open===key?wheel(key):''}`;
+function onWheel(el){
+  const k=el.dataset.key,[min,max]=RANGE[k];
+  const v=Math.max(min,Math.min(max,min+Math.round(el.scrollTop/36)));
+  el.querySelectorAll('.wi').forEach((w,i)=>w.classList.toggle('sel',i===v-min));
+  if(v===S[k])return;
+  S[k]=v;
+  const lab=document.querySelector(`[data-val="${k}"]`);if(lab)lab.textContent=`${v} ${L(RANGE[k][2])}`;
+  refreshLive();
+}
+function initWheels(){document.querySelectorAll('.ws').forEach(el=>{el.scrollTop=(S[el.dataset.key]-RANGE[el.dataset.key][0])*36;});}
+function refreshLive(){
+  document.getElementById('app').classList.add('static');
+  const tmp=document.createElement('div');tmp.innerHTML=V[cur()]();
+  document.querySelectorAll('#app [data-live]').forEach(el=>{const n=tmp.querySelector(`[data-live="${el.dataset.live}"]`);if(n)el.replaceWith(n);});
+}
+function set(k,v){S[k]=v;render();}
+const lower=s=>s.toLowerCase();
+
+/* ---------- screens ---------- */
+const V={
+welcome:()=>`<div class="screen">
+  <div class="hero">
+    <div class="logo">Healthy Me</div><div class="logo-sub">${L('Well-being coach')}</div>
+    <div class="bubbles">${['dumbbell','bowl','yoga','drop','bulb','moon'].map(n=>`<div>${ic(n)}</div>`).join('')}</div>
+    <h1 style="font-size:24px">${L('Create a personalized plan that fits you')}</h1>
+    <div class="time-pill">${ic('timer')} ${L('Takes about 1 minute')}</div>
+  </div>
+  ${footer('Get started',true,'go(1)',`<button class="ghost">${L('I already have an account')}</button>`)}
+</div>`,
+
+goal:()=>`<div class="screen">${topBar('About you')}${prog()}<div class="body center">
+  <h1>${L('What’s your main goal?')}</h1>
+  <div class="opts">
+    ${[['flame','Lose weight','Drop extra pounds with ease'],['dumbbell','Build muscle','Get lean and strong'],['sparkle','Keep fit','Stay in shape and feel great'],['heart','Find self-love','Embrace your changing body']]
+      .map(([i,t,d])=>opt(ic(i),L(t),L(d),S.goal===t,`pick('goal','${t}')`,'',true)).join('')}
+  </div></div></div>`,
+
+body:()=>{
+  const b=bmi(S.weight,S.height).toFixed(1);
+  const ok=b>=18.5&&b<25;
+  return `<div class="screen">${topBar('About you')}${prog()}<div class="body center">
+  <h1>${L('Tell us about your body')}</h1>
+  <div class="sub">${L('We use this to calculate a safe calorie and workout range.')}</div>
+  <div style="margin-top:24px">${segCtl()}</div>
+  <div class="group">${row('age','Age')}${row('height','Height')}${row('weight','Weight')}<button class="row" data-live="bmi" onclick="openBmiSheet()"><span>${L('BMI')}</span><span class="val bmi-val">${b}<span class="bmi-ic ${ok?'ok':'warn'}">${ic(ok?'checkCircle':'alertCircle')}</span></span></button></div>
+  </div>${footer('Next')}</div>`;
+},
+
+target:()=>{
+  const min=minHealthy(), tb=bmi(S.target,S.height).toFixed(1), low=S.target<min;
+  const diff=S.weight-S.target;
+  return `<div class="screen">${topBar('About you')}${prog()}<div class="body center">
+  <h1>${L('What’s your goal weight?')}</h1>
+  <div class="sub" data-live="range">${L('Healthy range for your height: <span class="nw">{a}–{b} kg</span>',{a:min,b:(24.9*((S.height/100)**2)).toFixed(1)})}</div>
+  <div class="group" style="margin-top:24px">${wheel('target')}</div>
+  <div data-live="tnote">${low?`<div class="note warn"><b>${L('This target is below a healthy weight')}</b>${L('A BMI of {b} is classified as underweight and may put your health at risk. We can’t build a plan toward it.',{b:tb})}</div>`
+       : diff>0?`<div class="note ok"><b>${L('Realistic goal: −{d} kg',{d:diff.toFixed(1)})}</b>${L('At a safe pace of ~0.5 kg a week, that’s about {w} weeks.',{w:Math.ceil(diff/0.5)})}</div>`
+       :`<div class="note warn"><b>${L('Target is not below your current weight')}</b>${L('Consider “Keep fit” or “Build muscle” as your goal instead.')}</div>`}</div>
+  </div><div data-live="tfoot">${footer('Next',!low&&diff>0)}</div></div>`;
+},
+
+health:()=>{
+  const list=['Sensitive back','Sensitive knees','Diabetes','Pregnancy','Wheelchair','Limb loss'];
+  const cb=on=>`<span class="cbx ${on?'on':''}">${on?ic('check'):''}</span>`;
+  const rowH=id=>{
+    const st=followState(id), on=st?st.on:S.health.includes(id);
+    const act=FOLLOW[id]?(on?`clearFollow('${id}')`:`openFollow('${id}')`):`toggleHealth('${id}')`;
+    return `<button class="row crow" onclick="${act}"><span class="rl"><span>${L(id)}</span>${st&&st.sub?`<small>${st.sub}</small>`:''}</span>${cb(on)}</button>`;
+  };
+  return `<div class="screen">${topBar('Health')}${prog()}<div class="body center">
+  <h1>${L('Anything we should adapt for?')}</h1>
+  <div class="sub">${L('Select all that apply. We’ll adapt your workouts and meals to them.')}</div>
+  <div class="group" style="margin-top:22px"><button class="row crow" onclick="toggleHealth('None')"><span>${L('None of these')}</span>${cb(S.health.includes('None'))}</button></div>
+  <div class="group">${list.map(rowH).join('')}</div>
+  </div>${footer('Next',S.health.length>0,'go(1)',`<p class="legal">${L('By tapping Next, you agree that Healthy Me may process your health data to personalise your plan. You can withdraw consent anytime in your profile.')} <a href="#" onclick="return false">${L('Privacy Policy')}</a></p>`)}</div>`;
+},
+
+include:()=>{
+  const items=[['dumbbell','Workouts','Short sessions adapted to you'],['bowl','Meal plan','Simple recipes for your goal'],['bulb','Mindset','3-minute daily psychology reads'],['cycle','Cycle tracking','Sync workouts with your cycle'],['timer','Fasting','Guided intermittent fasting']];
+  return `<div class="screen">${topBar('Your plan')}${prog()}<div class="body center">
+  <h1>${L('What should your plan include?')}</h1>
+  <div class="sub">${L('You can change this anytime')}</div>
+  <div class="opts">${items.filter(([i,t])=>!((t==='Fasting'&&fastingBlocked())||(t==='Cycle tracking'&&isPreg())))
+    .map(([i,t,d])=>opt(ic(i),L(t),L(d),S.include.includes(t),`toggleInc('${t}')`)).join('')}</div>
+  </div>${footer('Next',S.include.length>0)}</div>`;
+},
+
+time:()=>`<div class="screen">${topBar('Your plan')}${prog()}<div class="body center">
+  <h1>${L('How much time can you give each day?')}</h1>
+  <div class="sub">${L('We’ll build day 1 around this, so it’s always doable.')}</div>
+  <div class="opts">${[[5,'Just a little','Perfect for busy days'],[10,'A short session','Most popular'],[15,'A proper workout','Steady progress'],[20,'I’m ready for more','Faster results']]
+    .map(([m,t,d])=>`<button class="opt radio ${S.minPicked&&S.minutes===m?'sel':''}" onclick="S.minPicked=true;pick('minutes',${m})"><div class="ic ic-g">${gauge(m/20)}</div><div><div class="t">${L(t)}</div><div class="d">${L(d)}</div></div><div class="trail">${m} ${L('min')}</div></button>`).join('')}</div>
+  </div></div>`,
+
+name:()=>`<div class="screen">${topBar('Almost there')}${prog()}<div class="body center">
+  <h1>${L('What should we call you?')}</h1>
+  <input class="textin" id="nm" placeholder="${L('Your name')}" value="${S.name}" oninput="S.name=this.value;document.getElementById('nb').disabled=!this.value.trim()" autocomplete="off">
+  </div><div class="footer"><button class="cta" id="nb" ${S.name.trim()?'':'disabled'} onclick="btnLoad(this,()=>go(1),900)">${L('Create my plan')}</button></div></div>`,
+
+loading:()=>{
+  const steps=[L('Adapting to your goal: {g}',{g:lower(L(S.goal||''))}),
+    S.health.includes('None')?L('Checking your health profile'):L('Adjusting for {x}',{x:lower(S.health.map(h=>L(h)).join(', '))}),
+    L('Fitting workouts into {m} min a day',{m:S.minutes}),L('Selecting recipes & first steps')];
+  S._steps=steps;
+  setTimeout(runLoading,50);
+  return `<div class="screen"><div class="body center load">
+  <div class="ring"><svg width="170" height="170"><circle cx="85" cy="85" r="78" stroke="var(--line)" stroke-width="6" fill="none"/><circle id="arc" cx="85" cy="85" r="78" stroke="var(--dark)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490" style="transition:stroke-dashoffset .25s"/></svg><span id="pct">0%</span></div>
+  <h1>${S.name?L('{n}, we’re creating your plan',{n:S.name}):L('We’re creating your plan')}</h1>
+  <div class="step-line" id="stepLine"><span>${steps[0]}</span></div>
+  <div class="step-dots">${steps.map((_,i)=>`<i class="${i===0?'cur':''}"></i>`).join('')}</div>
+  </div></div>`;
+},
+
+plan:()=>{
+  const adj=[];
+  if(isPreg()) adj.push(L(S.pregOverride&&S.goal==='Lose weight'?'Gentle workouts and a mild calorie deficit for pregnancy & postpartum':'Gentle workouts and nourishing meals for pregnancy & postpartum'));
+  if(fastingBlocked()) adj.push(L('Fasting turned off for your health profile'));
+  if(S.health.includes('Wheelchair')) adj.push(L('Seated workouts only · {w}',{w:L(S.wheel)}));
+  if(S.health.includes('Limb loss')) adj.push(L('Exercises adapted for limb loss · {l}',{l:lower(L(S.limb))}));
+  if(S.health.some(h=>h.startsWith('Sensitive'))) adj.push(L('Low-impact moves · {x}',{x:lower(S.health.filter(h=>h.startsWith('Sensitive')).map(h=>L(h)).join(', '))}));
+  if(S.health.some(h=>h.includes('diabetes'))) adj.push(L('Meals balanced for stable blood sugar'));
+  const goalLine = S.goal==='Lose weight'&&!isPreg()?L('{a} → {b} kg in ~{w} weeks',{a:S.weight,b:S.target,w:Math.ceil((S.weight-S.target)/0.5)})
+    : L(S.goal==='Build muscle'?'Strength focus · protein-forward meals'
+    : S.goal==='Keep fit'?'Stay active · balanced meals':'Gentle movement · mindset first');
+  const wk = S.health.includes('Wheelchair')?'Seated upper body':S.health.includes('Limb loss')?'Adaptive strength':isPreg()?'Gentle prenatal flow':S.goal==='Build muscle'?'Strength starter':'Full body starter';
+  S._wk=wk;
+  const gIcon={'Lose weight':'flame','Build muscle':'dumbbell','Keep fit':'sparkle','Find self-love':'heart'};
+  const adapted=isPreg()&&S.goal==='Lose weight'&&!S.pregOverride;
+  const gTitle=titleCase(adapted?L('Stay active & healthy'):L(S.goal));
+  const gSub=adapted?L('Adapted for pregnancy: gentle pace and no calorie deficit.'):isPreg()&&S.goal==='Lose weight'?L('Gentle pace · mild calorie deficit'):goalLine;
+  // short "adapted" chips
+  const chips=[];
+  if(isPreg()) chips.push(L(S.pregOverride&&S.goal==='Lose weight'?'Mild calorie deficit':'Pregnancy-safe'));
+  if(fastingBlocked()) chips.push(L(isPreg()?'No fasting':'No fasting (diabetes)'));
+  if(S.health.includes('Wheelchair')) chips.push(L('Seated workouts'));
+  if(S.health.includes('Limb loss')) chips.push(L('Limb-loss adapted'));
+  if(S.health.includes('Sensitive back')) chips.push(L('Low-impact for your back'));
+  if(S.health.includes('Sensitive knees')) chips.push(L('Low-impact for your knees'));
+  if(S.health.some(h=>h.includes('diabetes'))) chips.push(L('Stable blood sugar'));
+  // weekly focus split
+  const base={'Lose weight':[35,20,15,30],'Build muscle':[50,20,15,15],'Keep fit':[35,30,15,20],'Find self-love':[20,30,35,15]}[S.goal]||[30,30,20,20];
+  let f=[...base]; if(isPreg()){f[0]-=15;f[1]+=15;} if(!S.include.includes('Meal plan')){f[3]=0;}
+  const names=['Strength','Mobility','Mindset','Nutrition'], cols=['#2B1D17','#8DB255','#E3A857','#C9B3A0'];
+  const sum=f.reduce((a,b)=>a+b,0); f=f.map(v=>Math.round(v/sum*100));
+  const C=2*Math.PI*42; let acc=0;
+  const donut=`<svg viewBox="0 0 100 100" class="donut">${f.map((v,k)=>{if(!v)return'';const len=v/100*C,gap=f.filter(Boolean).length>1?2:0;const el=`<circle cx="50" cy="50" r="42" fill="none" stroke="${cols[k]}" stroke-width="12" stroke-dasharray="${Math.max(0,len-gap)} ${C}" stroke-dashoffset="${-acc}" transform="rotate(-90 50 50)"/>`;acc+=len;return el;}).join('')}<text x="50" y="47" text-anchor="middle" class="dn-v">${S.minutes}</text><text x="50" y="61" text-anchor="middle" class="dn-l">${L('min/day')}</text></svg>`;
+  const legend=f.map((v,k)=>v?`<li><i style="background:${cols[k]}"></i><span>${L(names[k])}</span><b>${v}%</b></li>`:'').join('');
+  // first week preview
+  const loc=LANG==='ua'?'uk-UA':'en-GB', today=startOfDay(new Date());
+  const tints=['#EFE6DB','#E6EEDA','#F4E6D2','#ECE3EE','#E3EAF0'];
+  const week=[0,1,2,3,4].map(n=>{const ts=dayTasks(n),w=ts[0],d=addDays(today,n);
+    const lab=n===0?L('Today'):new Intl.DateTimeFormat(loc,{weekday:'short',day:'numeric'}).format(d);
+    return `<div class="wcard"><div class="wc-top" style="background:${tints[n%5]}">${ic('image')}</div><div class="wc-b"><b>${w.title}</b><small>${ts.reduce((a,t)=>a+t.min,0)} ${L('min')}</small></div></div>`;}).join('');
+  const init=(S.name||'N').trim()[0].toUpperCase();
+  return `<div class="screen">${topBar('',false)}<div class="body" style="padding-top:0">
+  <div class="prof">
+    <div class="av-lg"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="37" fill="none" stroke="var(--line)" stroke-width="3"/><circle cx="40" cy="40" r="37" fill="none" stroke="var(--green)" stroke-width="3" stroke-linecap="round" stroke-dasharray="${2*Math.PI*37*0.14} 999" transform="rotate(-90 40 40)"/></svg><span>${init}</span></div>
+    <h1>${L('{n}, your plan is ready',{n:S.name})}</h1>
+    <div class="goal-pill">${ic(adapted?'heart':gIcon[S.goal]||'sparkle')}<span>${gTitle}</span></div>
+    <div class="goal-sub">${gSub}</div>
+    ${adapted?`<button class="ghost sm" onclick="openOverride()">${L('Keep weight loss goal')}</button>`:''}
+  </div>
+  <div class="stat3">
+    <div><small>${L('Age')}</small><b>${S.age}</b></div>
+    <div><small>${L('Height')}</small><b>${S.height}<em>${L('cm')}</em></b></div>
+    <div><small>${L('Weight')}</small><b>${S.goal==='Lose weight'&&!isPreg()?`${S.weight}→${S.target}`:S.weight}<em>${L('kg')}</em></b></div>
+  </div>
+  <div class="sec-h"><span>${titleCase(L('Weekly focus'))}</span></div>
+  <div class="group focus">${donut}<ul class="legend">${legend}</ul></div>
+  <div class="sec-h"><span>${titleCase(L('Your first week'))}</span><span>${L('{m} min a day',{m:S.minutes+3})}</span></div>
+  <div class="hscroll">${week}</div>
+  ${chips.length?`<div class="sec-h"><span>${titleCase(L('Adapted for you'))}</span></div><div class="pills">${chips.map(c=>`<span class="pill">${ic('check')}${c}</span>`).join('')}</div>`:''}
+  </div>${footer('Start day 1',true,'btnLoad(this,()=>go(1))')}</div>`;
+},
+
+notif:()=>`<div class="screen">${topBar('',false)}<div class="body">
+  <div class="bell">${ic('bell')}</div>
+  <h1>${L('When should we remind you?')}</h1>
+  <div class="sub">${L('People with a set workout time are 80% more likely to reach their goal. One reminder a day, no spam.')}</div>
+  <div class="times">${[['08:00','Morning'],['13:00','Lunch'],['19:00','Evening']].map(([t,l])=>`<button class="${S.notif===t?'sel':''}" onclick="S.notif='${t}';render();setTimeout(showSys,200)">${t}<small>${L(l)}</small></button>`).join('')}</div>
+  </div><div class="footer"><button class="ghost" onclick="go(1)">${L('Not now')}</button></div></div>`,
+
+save:()=>`<div class="screen">${topBar('',false)}<div class="body">
+  <div class="bell" style="background:var(--green-bg);color:var(--green)">${ic('cloud')}</div>
+  <h1>${L('Save your plan')}</h1>
+  <div class="sub">${L('Keep your answers and progress safe across devices. It takes 5 seconds.')}</div>
+  <div class="auth"><button class="apple" onclick="btnLoad(this,()=>go(1))">${ic('apple')} ${L('Continue with Apple')}</button><button class="mail" onclick="btnLoad(this,()=>go(1))">${ic('mail')} ${L('Continue with email')}</button></div>
+  </div><div class="footer"><button class="ghost" onclick="go(1)">${L('Maybe later')}</button></div></div>`,
+
+home:()=>{
+  const day=S.day||0, today=startOfDay(new Date()), sel=addDays(today,day);
+  const ws=addDays(sel,-((sel.getDay()+6)%7));
+  const loc=LANG==='ua'?'uk-UA':'en-GB';
+  const letters=LANG==='ua'?['П','В','С','Ч','П','С','Н']:['M','T','W','T','F','S','S'];
+  const strip=[0,1,2,3,4,5,6].map(k=>{const d=addDays(ws,k),off=Math.round((d-today)/864e5);
+    return `<button class="wd ${off<0?'past':''} ${off===day?'sel':''} ${off===0?'today':''}" ${off<0?'disabled':`onclick="setDay(${off})"`}><small>${letters[k]}</small><span>${d.getDate()}</span></button>`;}).join('');
+  const tasks=dayTasks(day), isToday=day===0;
+  if(S.detail){const t=tasks.find(x=>x.id===S.detail);if(t)return detailView(t,day);}
+  const done=tasks.filter(taskDone).length, total=tasks.reduce((a,t)=>a+t.min,0);
+  const row=t=>`<div class="lrow tap" onclick="openDetail('${t.id}')"><span class="tile">${ic(t.icon)}</span><span class="tt"><span>${t.title}</span>${t.sub?`<small>${t.sub}</small>`:''}</span>${t.isNew?`<span class="badge">${L('New')}</span>`:''}<span class="trail">${t.min} ${L('min')}</span>${isToday&&taskDone(t)?`<span class="cbx on">${ic('check')}</span>`:`<span class="chev">${ic('chev')}</span>`}</div>`;
+  return `<div class="screen">
+  <div class="home-h"><h2>${L('Plan')}</h2><div class="avatar">${(S.name||'N')[0].toUpperCase()}</div></div>
+  <div class="week">${strip}</div><div class="week-line"></div>
+  <div class="body swipe" style="padding-top:0">
+    <div class="sec-h"><span>${isToday?(done===tasks.length?L('Day complete'):L('{d} of {n} done',{d:done,n:tasks.length})):L('Day {n} of your plan',{n:day+1})}</span><span>${L('{m} min total',{m:total})}</span></div>
+    <div class="group">${S._skel?tasks.map(()=>`<div class="lrow"><span class="tile sk"></span><span class="tt"><span class="sk sk-l"></span><span class="sk sk-s"></span></span></div>`).join(''):tasks.map(row).join('')}</div>
+  </div>
+  ${isToday&&done===tasks.length?`<div class="toast">${L('Great start, {n}! Come back tomorrow for day 2.',{n:S.name})}</div>`:''}
+  <div class="tabbar"><div><span>${ic('plan')}</span>${L('Plan')}</div><div><span>${ic('bars')}</span>${L('Progress')}</div><div><span>${ic('play')}</span>${L('Workouts')}</div><div><span>${ic('grid')}</span>${L('More')}</div></div>
+  </div>`;
+}
+};
+
+function detailView(t,day){
+  const isToday=day===0, left=t.items.filter(i=>!S.done[i.id]).length, all=left===0;
+  const sub=t.kind==='wk'?L('{m} min · {k} exercises',{m:t.min,k:t.items.length}):t.min?L('{m} min · {k} steps',{m:t.min,k:t.items.length}):'';
+  const card=it=>`<div class="opt ex ${isToday?'':'off-t'}" ${isToday?`onclick="S.done['${it.id}']=!S.done['${it.id}'];render()"`:''}><div class="ic">${ic(it.icon)}</div><div><div class="t">${it.t}</div>${it.min?`<div class="d">${it.min} ${L('min')}</div>`:''}</div>${isToday?`<span class="cbx ${S.done[it.id]?'on':''}">${S.done[it.id]?ic('check'):''}</span>`:''}</div>`;
+  const cta=!isToday?`<button class="cta" disabled>${L('Opens on day {n}',{n:day+1})}</button>`
+    :all?`<button class="cta" onclick="closeDetail()">${L('Done')}</button>`
+    :`<button class="cta" onclick="startNext(this)">${L(t.kind==='wk'?'Start Workout':t.kind==='mind'?'Start Reading':'Start')}</button>`;
+  return `<div class="screen"><div class="top"><button class="back" onclick="closeDetail()">←</button><div class="title"></div><div style="width:32px"></div></div>
+  <div class="body" style="padding-top:8px">
+    <h1>${t.title}</h1>${sub?`<div class="sub">${sub}</div>`:''}
+    <div class="opts">${t.items.map(card).join('')}</div>
+  </div><div class="footer">${cta}</div></div>`;
+}
+/* ---------- actions ---------- */
+const startOfDay=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x;};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+function split(names,total){const k=names.length,base=Math.max(1,Math.floor(total/k));return names.map((n,i)=>[n,i===k-1?Math.max(1,total-base*(k-1)):base]);}
+function dayTasks(n){
+  const wkAlt=['Mobility & stretch','Core & balance'];
+  const wk=n%2===0?(S._wk||'Full body starter'):wkAlt[Math.floor(n/2)%2];
+  const EX={
+    'Full body starter':['Warm-up','Squats','Glute bridge','Push-ups on knees','Cool-down stretch'],
+    'Strength starter':['Warm-up','Squats','Glute bridge','Push-ups on knees','Cool-down stretch'],
+    'Seated upper body':['Seated warm-up','Arm circles','Band rows','Chest press','Seated stretch'],
+    'Adaptive strength':['Warm-up','Core bracing','Single-arm band row','Balance drill','Cool-down stretch'],
+    'Gentle prenatal flow':['Breathing','Cat-cow','Side-lying leg lifts','Pelvic tilts','Relax'],
+    'Mobility & stretch':['Neck & shoulder rolls','Cat-cow','Hip opener','Hamstring stretch'],
+    'Core & balance':['Dead bug','Bird dog','Side plank','Balance hold']
+  };
+  const exList=S.health.includes('Wheelchair')?EX['Seated upper body']:isPreg()?EX['Gentle prenatal flow']:EX[wk];
+  const t=[{id:'wk'+n,key:isPreg()?'Gentle prenatal flow':wk,icon:'dumbbell',kind:'wk',title:titleCase(L(wk)),min:S.minutes,items:split(exList,S.minutes).map(([x,m])=>({t:titleCase(L(x)),min:m,icon:'dumbbell'}))}];
+  const feats=S.include.filter(x=>x!=='Workouts'&&x!=='Mindset');
+  const meta={'Meal plan':['bowl','Today’s recipes',5,['Breakfast','Lunch','Dinner']],'Cycle tracking':['cycle','Log how you feel',2,['Log how you feel']],'Fasting':['timer','Your 12:12 window',1,['Start 12:12 fast']]};
+  feats.forEach((f,k)=>{ if(n>=k+1){const [icon,sub,min,its]=meta[f];t.push({id:f+n,icon,kind:'feat',title:titleCase(L(f)),sub:L(sub),min,isNew:n===k+1,items:its.map(x=>({t:titleCase(L(x)),icon}))});} });
+  const mind=n===0?[['We Know What You’re Thinking',2],['Stop Them Before They Stop You',1]]:[[L('Chapter {c}: part {p}',{c:n+1,p:1}),2],[L('Chapter {c}: part {p}',{c:n+1,p:2}),1]];
+  t.push({id:'mind'+n,icon:'bulb',kind:'mind',title:titleCase(n===0?L('Start with your mind'):L('Mindset · chapter {c}',{c:n+1})),min:3,items:mind.map(([x,m])=>({t:titleCase(L(x)),min:m,icon:'bulb'}))});
+  t.forEach(x=>x.items.forEach((it,i)=>it.id=x.id+':'+i));
+  return t;
+}
+const taskDone=t=>t.items.every(it=>S.done[it.id]);
+function openDetail(id){DIR=1;S.detail=id;render();}
+function closeDetail(){DIR=-1;S.detail=null;render();}
+function startNext(el){const t=dayTasks(S.day||0).find(x=>x.id===S.detail);const it=t.items.find(i=>!S.done[i.id]);if(!it)return closeDetail();btnLoad(el,()=>{S.done[it.id]=true;render();});}
+function setDay(n){ if(n===(S.day||0))return; DIR=n>(S.day||0)?1:-1; S.day=n; S._skel=true; render(); document.querySelector('.swipe')?.classList.add(DIR<0?'slide-l':'slide-r'); clearTimeout(S._skT); S._skT=setTimeout(()=>{S._skel=false;render();document.querySelector('.swipe')?.classList.add('reveal');},380); }
+function btnLoad(el,fn,ms=650){ if(el.classList.contains('loading'))return; el.classList.add('loading'); setTimeout(fn,ms); }
+function bindSwipe(){
+  const el=document.querySelector('.swipe');if(!el)return;
+  let x0=null;
+  el.addEventListener('pointerdown',e=>{x0=e.clientX;});
+  el.addEventListener('pointerup',e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;
+    if(Math.abs(dx)>50){const nd=Math.max(0,Math.min(27,(S.day||0)+(dx<0?1:-1)));if(nd!==(S.day||0)){setDay(nd);}}});
+}
+function toggleHealth(h){
+  if(h==='None'){S.health=S.health.includes('None')?[]:['None'];S.consent=false;S.wheel=null;S.limb=null;}
+  else{
+    S.health=S.health.filter(x=>x!=='None');
+    S.health=S.health.includes(h)?S.health.filter(x=>x!==h):[...S.health,h];
+    if(h==='Wheelchair'&&!S.health.includes(h))S.wheel=null;
+    if(h==='Limb loss'&&!S.health.includes(h))S.limb=null;
+  }
+  if(fastingBlocked())S.include=S.include.filter(x=>x!=='Fasting');
+  if(isPreg())S.include=S.include.filter(x=>x!=='Cycle tracking');
+  render();
+}
+function toggleInc(t){S.include=S.include.includes(t)?S.include.filter(x=>x!==t):[...S.include,t];render();}
+function runLoading(){
+  let p=0,step=0;const dots=[...document.querySelectorAll('.step-dots i')],line=document.getElementById('stepLine');
+  const iv=setInterval(()=>{
+    p+=4;const el=document.getElementById('pct'),arc=document.getElementById('arc');
+    if(!el){clearInterval(iv);return;}
+    el.textContent=Math.min(p,100)+'%';arc.style.strokeDashoffset=490-490*Math.min(p,100)/100;
+    const ns=Math.min(S._steps.length-1,Math.floor(p/25));
+    if(ns!==step&&line){step=ns;line.innerHTML=`<span>${S._steps[step]}</span>`;}
+    dots.forEach((d,i)=>{d.classList.toggle('done',i<ns||p>=100);d.classList.toggle('cur',i===ns&&p<100);});
+    if(p>=100){clearInterval(iv);setTimeout(()=>go(1),450);}
+  },70);
+}
+function bmiCat(b){return b<18.5?'Underweight':b<25?'Normal':b<30?'Overweight':'Obesity';}
+const FOLLOW={
+  'Diabetes':{q:'Which type of diabetes?',opts:['Type 1 diabetes','Type 2 diabetes'],codes:true},
+  'Pregnancy':{q:'What applies to you?',opts:['Prenatal','Postnatal'],codes:true},
+  'Wheelchair':{key:'wheel',q:'Which classes interest you?',opts:['Wheelchair fitness','Wheelchair cardio']},
+  'Limb loss':{key:'limb',q:'Which type of limb loss?',opts:['Upper limb','Lower limb']}
+};
+function followState(id){
+  const f=FOLLOW[id];if(!f)return null;
+  if(f.codes){const sel=f.opts.find(o=>S.health.includes(o));return {on:!!sel,sub:sel?L(sel):''};}
+  return {on:S.health.includes(id),sub:S[f.key]?L(S[f.key]):''};
+}
+function clearFollow(id){
+  const f=FOLLOW[id];
+  if(f.codes){S.health=S.health.filter(x=>!f.opts.includes(x));render();}
+  else toggleHealth(id);
+}
+function openSheet(title,body,ok=true){
+  const d=document.createElement('div');d.className='sheet-wrap';
+  d.innerHTML=`<div class="sheet-bg" onclick="closeSheet()"></div><div class="sheet"><div class="grabber"></div>
+    <div class="sheet-h"><button class="sh-btn" aria-label="Close" onclick="closeSheet()">${ic('x')}</button><b>${title}</b>${ok?`<button class="sh-btn ok" aria-label="Done" onclick="closeSheet()">${ic('check')}</button>`:'<span></span>'}</div>
+    <div class="sheet-body">${body}</div></div>`;
+  document.getElementById('phone').appendChild(d);
+  requestAnimationFrame(()=>d.classList.add('on'));
+}
+const SMALL=new Set(['a','an','the','and','but','or','for','nor','of','to','in','on','at','by','as','у','в','з','і','й','та','а','о','до','на','за','під','про','для','від','або','із','зі','що']);
+const titleCase=t=>t.split(/([\s ]+)/).map((w,i)=>/^[\s ]+$/.test(w)||!w?w:(i>0&&SMALL.has(w.toLowerCase()))?w:w[0].toUpperCase()+w.slice(1)).join('');
+function openFollow(h){
+  const f=FOLLOW[h];
+  openSheet(titleCase(L(h)),`<p class="sheet-q">${L(f.q)}</p><div class="group">${f.opts.map(o=>`<button class="row" onclick="chooseFollow('${h}','${o}')"><span>${L(o)}</span></button>`).join('')}</div>`,false);
+}
+function chooseFollow(id,o){
+  const f=FOLLOW[id];
+  if(f.codes){S.health=S.health.filter(x=>!f.opts.includes(x));toggleHealth(o);}
+  else{S[f.key]=o;if(!S.health.includes(id))toggleHealth(id);else render();}
+  closeSheet();
+}
+function openOverride(){
+  openSheet(titleCase(L('Weight loss goal')),`<p class="sheet-text">${L('During pregnancy and after birth, your body needs extra energy. That’s why we suggest a plan without calorie restriction.')}</p>
+  <p class="sheet-text">${L('If you still want to lose weight, we’ll keep the pace gentle and the deficit mild. We recommend discussing it with your doctor.')}</p>
+  <button class="cta" style="margin-top:22px" onclick="S.pregOverride=true;closeSheet();render()">${L('Keep weight loss goal')}</button>
+  <button class="ghost" onclick="closeSheet()">${L('Keep adapted plan')}</button>`,false);
+}
+function openBmiSheet(){
+  const b=+bmi(S.weight,S.height).toFixed(1), cat=bmiCat(b);
+  const lo=15,hi=35,pos=Math.max(0,Math.min(100,(b-lo)/(hi-lo)*100));
+  const seg=[['Underweight',15,18.5,'#8FB3D9'],['Normal',18.5,25,'#8DB255'],['Overweight',25,30,'#E3A857'],['Obesity',30,35,'#D9785B']];
+  const d=document.createElement('div');d.className='sheet-wrap';
+  d.innerHTML=`<div class="sheet-bg" onclick="closeSheet()"></div>
+  <div class="sheet"><div class="grabber"></div>
+    <div class="sheet-h"><button class="sh-btn" aria-label="Close" onclick="closeSheet()">${ic('x')}</button><b>${L('Body Mass Index')}</b><button class="sh-btn ok" aria-label="Done" onclick="closeSheet()">${ic('check')}</button></div>
+    <div class="sheet-body">
+      <div class="bmi-big">${b}</div>
+      <div class="bmi-cat">${L(cat)}</div>
+      <div class="scale">${seg.map(([n,a,z,c])=>`<i style="flex:${z-a};background:${c}"></i>`).join('')}<span class="mark" style="left:${pos}%"></span></div>
+      <div class="scale-l"><span>15</span><span>18.5</span><span>25</span><span>30</span><span>35</span></div>
+      <div class="group" style="margin-top:22px">${seg.map(([n,a,z,c])=>`<div class="row srow ${n===cat?'cur':''}"><span><i class="dot" style="background:${c}"></i>${L(n)}</span><span class="val">${n==='Underweight'?'< 18.5':n==='Obesity'?'≥ 30':a+' – '+(z-0.1).toFixed(1)}</span></div>`).join('')}</div>
+      <p class="sheet-foot">${L('BMI is weight in kilograms divided by height in meters squared.')} ${L('It doesn’t account for muscle mass, age or body shape, so we use it only as a starting point for your plan.')}</p>
+    </div></div>`;
+  document.getElementById('phone').appendChild(d);
+  requestAnimationFrame(()=>d.classList.add('on'));
+}
+function closeSheet(){const d=document.querySelector('.sheet-wrap');if(!d)return;d.classList.remove('on');setTimeout(()=>d.remove(),300);}
+function showSys(){
+  const d=document.createElement('div');d.className='sys';
+  d.innerHTML=`<div class="sys-box"><h4>${L('“Healthy Me” Would Like to Send You Notifications')}</h4><p>${L('Daily reminder at {t}',{t:S.notif})}</p><div><button onclick="this.closest('.sys').remove();go(1)">${L('Don’t Allow')}</button><button onclick="this.closest('.sys').remove();go(1)">${L('Allow')}</button></div></div>`;
+  document.getElementById('phone').appendChild(d);
+}
+
+/* ---------- render ---------- */
+function render(){
+  const k=cur();
+  // loading screen restarts its timer on render; don't re-render it mid-animation for a language switch
+  const app=document.getElementById('app');
+  const vk=k+(k==='home'&&S.detail?'/'+S.detail:'');
+  const same=app.dataset.k===vk;
+  const y=same?(app.querySelector('.body')?.scrollTop||0):0;
+  if(!(k==='loading'&&document.getElementById('pct'))){
+    const before=same?[...app.querySelectorAll('.cbx,.opt .chk,.wd')].map(e=>e.classList.contains('on')||e.classList.contains('sel')||e.textContent.trim()==='✓'):[];
+    app.classList.toggle('static',same);
+    app.innerHTML=V[k]();
+    if(!same)app.firstElementChild?.classList.add(DIR<0?'from-left':'from-right');
+    if(same)[...app.querySelectorAll('.cbx,.opt .chk,.wd')].forEach((e,i)=>{const on=e.classList.contains('on')||e.classList.contains('sel')||e.textContent.trim()==='✓';if(on&&before[i]===false)e.classList.add('pop');});
+    app.dataset.k=vk;
+    initWheels();
+    bindSwipe();
+    if(same&&app.querySelector('.body'))app.querySelector('.body').scrollTop=y;
+  }
+  document.getElementById('ptabs').innerHTML=[['design','What changed'],['impact','Product impact']].map(([k,t])=>`<button class="${PANEL===k?'on':''}" onclick="PANEL='${k}';render()">${titleCase(L(t))}</button>`).join('');
+  document.getElementById('paneDesign').classList.toggle('off',PANEL!=='design');
+  document.getElementById('paneImpact').classList.toggle('off',PANEL!=='impact');
+  document.getElementById('impact').innerHTML=IMPACT.map(([t,d,m],i)=>`<li><span class="num-b">${i+1}</span><div><b>${L(t)}</b><p>${L(d)}</p><span class="metric">${ic('bars')}${L(m)}</span></div></li>`).join('');
+  document.getElementById('changes').innerHTML=CHANGES.map(([t,d],i)=>`<li><span class="num-b">${i+1}</span><div><b>${L(t)}</b><p>${L(d)}</p></div></li>`).join('');
+  document.querySelectorAll('[data-i]').forEach(el=>el.textContent=L(el.dataset.i));
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.l===LANG));
+  if(k==='name')setTimeout(()=>document.getElementById('nm')?.focus(),50);
+}
+document.documentElement.lang=LANG==='ua'?'uk':'en';
+render();
+</script>
+</body>
+</html>
