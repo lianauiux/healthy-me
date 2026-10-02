@@ -484,6 +484,57 @@ body.lang-swap .panel .ctrls>button{animation:langIn .5s var(--ease) .1s both}
 .panes>div{grid-area:1/1;transition:opacity .3s var(--ease),transform .3s var(--ease)}
 .panes>div.off{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(4px)}
 @media (max-width:1000px){.panel{width:380px}}
+
+/* ---------- full app ---------- */
+.tabbar div{cursor:pointer;transition:color .2s}
+.tabbar div:first-child{color:inherit;font-weight:inherit}
+.tabbar div.on{color:var(--ink);font-weight:600}
+button.avatar{cursor:pointer}
+.ph{display:flex;align-items:center;justify-content:center;color:rgba(43,29,23,.3);background-color:var(--card);background-image:repeating-linear-gradient(135deg,rgba(43,29,23,.045) 0 1px,transparent 1px 9px);font-size:30px}
+.pl-img{height:150px;border-radius:16px;margin:14px 0 18px}
+.art-img{height:140px;border-radius:16px;margin-bottom:16px}
+.sheet-img{height:130px;border-radius:14px}
+.pl-meta{font-size:13px;color:var(--muted);text-align:center;margin-bottom:6px}
+.segs{display:flex;gap:4px}
+.segs i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.segs i.done{background:var(--green)}.segs i.cur{background:var(--dark)}
+.tring{position:relative;width:170px;height:170px;margin:22px auto 0}
+.tring.sm{width:150px;height:150px;margin:6px auto 14px}
+.tring svg{position:absolute;inset:0}
+.tring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:600;font-variant-numeric:tabular-nums}
+.tring.sm span{font-size:30px}
+#tarc{transition:stroke-dashoffset 1s linear}
+.pl-ctrl{display:flex;align-items:center;justify-content:center;gap:28px;margin-top:22px}
+.pc{width:52px;height:52px;border-radius:50%;background:rgba(118,118,128,.12);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink)}
+.pc.big{width:72px;height:72px;background:var(--dark);color:#fff;font-size:26px}
+.pc:disabled{opacity:.35}
+.pl-next{text-align:center;font-size:14px;color:var(--muted);margin-top:18px}
+.article h1{text-align:left;max-width:none;margin-inline:0}
+.article .pl-meta{text-align:left}
+.article p{font-size:16px;line-height:1.6;margin-top:14px;color:var(--ink)}
+.done-ic{width:84px;height:84px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 20px;animation:pop .5s var(--spring) both}
+.done-ic .i{stroke-width:2.4}
+.sh-title{font-size:18px;font-weight:600;margin-top:14px}
+.sh-meta{font-size:13px;color:var(--muted);margin-top:4px}
+.vrow{gap:8px}
+.vrow .val{margin-left:auto}
+.vrow .chev{margin-left:0}
+.row.danger{color:#C2412D;justify-content:center;font-weight:500}
+.rl-i{display:flex;align-items:center;gap:10px}
+.sdots{display:grid;grid-template-columns:repeat(7,1fr);padding:14px 8px}
+.sd{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sd i{width:30px;height:30px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.sd.on i{background:var(--green)}
+.sd.now i{box-shadow:0 0 0 2px var(--ink)}
+.sd small{font-size:11px;color:var(--muted)}
+.wcard-p{padding-top:12px}
+.wchart{display:block;width:100%;height:96px}
+.wc-l{font-size:10px;fill:var(--green)}
+button.wcard{text-align:left;padding:0}
+.wcard.tap{cursor:pointer}
+.t-temp{bottom:96px;text-align:center}
+.sheet .auth{margin-top:16px}
+.w-hint{font-size:13px;color:var(--muted);text-align:center;padding:0 16px 10px}
 </style>
 </head>
 <body>
@@ -527,7 +578,8 @@ body.lang-swap .panel .ctrls>button{animation:langIn .5s var(--ease) .1s both}
 /* ---------- i18n ---------- */
 let LANG='en';
 try{ if(localStorage.getItem('proto-lang')==='ua') LANG='ua'; }catch(e){}
-const UA={
+const UA={'Minutes':'Хвилин','Log your weight weekly to see the trend.':'Записуй вагу щотижня, щоб бачити динаміку.',"End workout?":"Завершити тренування?","Completed exercises are saved.":"Виконані вправи збережено.","End":"Завершити","Keep Going":"Продовжити","Exercise {i} of {n}":"Вправа {i} з {n}","Up next: {x}":"Далі: {x}","Last exercise":"Остання вправа","Part {i} of {n}":"Частина {i} з {n}","Mark as Read":"Позначити Прочитаним","Workout complete":"Тренування завершено","Reading complete":"Читання завершено","Time":"Час","Exercises":"Вправи","Parts":"Частини","Day streak":"Днів поспіль","Back to Plan":"Назад до Плану","Most plans fail not because of the workouts, but because of the thoughts that come before them: “I’m too tired”, “one day won’t matter”, “I’ll start on Monday”.":"Більшість планів зриваються не через тренування, а через думки перед ними: «сил немає», «один день нічого не змінить», «почну з понеділка».","These thoughts feel like facts, but they are habits of the mind. The first step is simply to notice them when they appear.":"Ці думки здаються фактами, але це лише звички мислення. Перший крок — просто помічати їх, коли вони зʼявляються.","Today, try this: when you catch yourself about to skip something, name the thought. You don’t have to fight it. Just see it.":"Сьогодні спробуй так: коли ловиш себе на бажанні щось пропустити, назви цю думку. Не треба з нею боротися. Просто побач її.","Once you can notice a thought, you can answer it. Prepare one short reply in advance, like “Five minutes is enough to start.”":"Коли ти вмієш помітити думку, на неї можна відповісти. Підготуй заздалегідь одну коротку відповідь, наприклад: «Пʼяти хвилин достатньо, щоб почати».","Small starts beat perfect plans. Your workout today is short on purpose, so the reply is always true.":"Маленький старт кращий за ідеальний план. Сьогоднішнє тренування коротке навмисно, тож ця відповідь завжди правдива.","Keep noticing the thoughts that hold you back. Each time you act despite them, the next time gets easier.":"Продовжуй помічати думки, які тебе стримують. Щоразу, коли ти дієш попри них, наступного разу стає легше.","Think of one moment from yesterday when you followed your plan. What helped you do it?":"Згадай один момент учора, коли вдалося дотриматися плану. Що тобі допомогло?","Progress is rarely a straight line. A missed day is information, not failure.":"Прогрес рідко буває прямою лінією. Пропущений день — це інформація, а не провал.","Tomorrow, start with the smallest task on your list and let momentum do the rest.":"Завтра почни з найменшої задачі у списку, а далі тебе понесе інерція.","Greek yogurt with berries and oats":"Грецький йогурт з ягодами й вівсянкою","Chicken and quinoa bowl":"Боул з куркою та кіноа","Baked salmon with vegetables":"Запечений лосось з овочами","Greek yogurt, 200 g":"Грецький йогурт, 200 г","Berries, 80 g":"Ягоди, 80 г","Oats, 30 g":"Вівсянка, 30 г","Honey, 1 tsp":"Мед, 1 ч. л.","Chicken breast, 120 g":"Куряче філе, 120 г","Quinoa, 60 g":"Кіноа, 60 г","Cucumber and tomatoes":"Огірок і помідори","Olive oil, 1 tsp":"Оливкова олія, 1 ч. л.","Salmon fillet, 130 g":"Філе лосося, 130 г","Broccoli, 150 g":"Броколі, 150 г","Carrots, 100 g":"Морква, 100 г","Lemon and herbs":"Лимон і зелень","kcal":"ккал","g protein":"г білка","Ingredients":"Інгредієнти","Saved":"Збережено","Eaten":"Зʼїдено","Mark as Eaten":"Позначити Зʼїденим","How do you feel today?":"Як ти почуваєшся сьогодні?","Energetic":"Енергійно","Calm":"Спокійно","Tired":"Втомлено","Low mood":"Пригнічено","Cramps":"Спазми","Save":"Зберегти","Fasting started at {a}, ends at {b}":"Голодування почалося о {a}, завершиться о {b}","Starts now, ends at {t}":"Почнеться зараз, завершиться о {t}","Fasting in progress":"Голодування Триває","Start Fast":"Почати Голодування","Privacy & data":"Конфіденційність і дані","Your health data is used only to personalise your plan. We never sell it or use it for advertising.":"Твої дані про здоровʼя використовуються лише для персоналізації плану. Ми ніколи їх не продаємо й не використовуємо для реклами.","You can withdraw consent or delete your data anytime in Profile.":"Відкликати згоду або видалити дані можна будь-коли в профілі.","Got It":"Зрозуміло","Help":"Допомога","Questions about your plan or the app? Our team replies within 24 hours.":"Питання щодо плану чи застосунку? Наша команда відповідає протягом 24 годин.","Contact Support":"Написати в Підтримку","Message sent. We’ll reply soon.":"Повідомлення надіслано. Скоро відповімо.","Language":"Мова","Reminders":"Нагадування","Off":"Вимкнено","Welcome back":"З поверненням","Sign in to continue your plan.":"Увійди, щоб продовжити свій план.","Log out?":"Вийти?","Your plan and progress stay saved in your account.":"Твій план і прогрес збережуться в акаунті.","Log Out":"Вийти","Cancel":"Скасувати","Goal":"Мета","Plan updated":"План оновлено","Time per day":"Час на день","Name":"Імʼя","Health conditions":"Особливості здоровʼя","Log Weight":"Записати Вагу","Weight saved":"Вагу збережено","Workouts done":"Тренувань","Minutes this week":"Хвилин за тиждень","This week":"Цей тиждень","For you":"Для тебе","All workouts":"Усі тренування","View profile":"Переглянути профіль","Profile":"Профіль",
+
 'Onboarding redesign · concept':'Редизайн онбордингу · концепт','screens before':'екранів було','screens now (adaptive)':'екранів тепер (адаптивно)','Before':'Було','After':'Стало','↺ Restart':'↺ Спочатку','← Back':'← Назад',
 'Well-being coach':'Коуч із добробуту','Here to improve your health':'Тут, щоб покращити твоє здоровʼя','Create your personalized plan that fits your body, time and health':'Створи персоналізований план під своє тіло, час і здоровʼя','Create a personalized plan that fits you':'Створи план, що підходить саме тобі','Takes about 1 minute':'Займе близько 1 хвилини','Get started':'Почати','I already have an account':'У Мене Вже Є Акаунт',
 'About you':'Про Тебе','What’s your main goal?':'Яка Твоя Головна Мета?',
@@ -648,7 +700,7 @@ let curKey='welcome';
 const cur=()=>curKey;
 let DIR=1;
 function go(d){ DIR=d<0?-1:1; document.querySelector('.sheet-wrap')?.remove(); const f=flow(); const i=Math.max(0,Math.min(f.length-1,f.indexOf(curKey)+d)); curKey=f[i]; render(); }
-function restart(){ Object.assign(S,{goal:null,health:[],wheel:null,limb:null,consent:false,include:['Workouts','Meal plan'],minutes:10,name:'',notif:null,tasks:{},done:{},detail:null,day:0,minPicked:false,pregOverride:false,sex:'Female',age:35,height:164,weight:66,target:61,open:null}); curKey='welcome'; render(); }
+function restart(){ Object.assign(S,{goal:null,health:[],wheel:null,limb:null,consent:false,include:['Workouts','Meal plan'],minutes:10,name:'',notif:null,tasks:{},done:{},detail:null,day:0,tab:'plan',sub:null,play:null,wlog:null,mood:null,fast:null,minPicked:false,pregOverride:false,sex:'Female',age:35,height:164,weight:66,target:61,open:null}); curKey='welcome'; render(); }
 
 /* ---------- side notes ---------- */
 const NOTES={
@@ -710,6 +762,8 @@ const I={
   alertCircle:'<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.2"/><path d="M12 16.2v.1"/>',
   chev:'<path d="m9.5 6 6 6-6 6"/>',
   image:'<rect x="3.5" y="5" width="17" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="m20.5 16-4.5-4.5-7.5 7.5"/>',
+  playf:'<path fill="currentColor" stroke="none" d="M8 5.5v13l11-6.5z"/>',
+  pause:'<rect fill="currentColor" stroke="none" x="6.5" y="5" width="4" height="14" rx="1.2"/><rect fill="currentColor" stroke="none" x="13.5" y="5" width="4" height="14" rx="1.2"/>',
   x:'<path d="M7 7l10 10M17 7 7 17"/>',
   check:'<path d="m5.5 12.5 4.2 4.2 8.8-9.4"/>',
   grid:'<rect x="4" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.8"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.8"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.8"/>'
@@ -746,7 +800,7 @@ const footer=(label,enabled=true,action='go(1)',extra='')=>`<div class="footer">
 const AVG={Female:{age:35,height:164,weight:66},Male:{age:35,height:178,weight:82}};
 function setSex(x){ if(S.sex===x)return; S.sex=x; Object.assign(S,AVG[x]); S.target=S.weight-5; render(); }
 const segCtl=()=>`<div class="ios-seg" data-on="${S.sex==='Male'?1:0}"><i></i>${['Female','Male'].map(x=>`<button class="${S.sex===x?'on':''}" onclick="setSex('${x}')">${L(x)}</button>`).join('')}</div>`;
-const RANGE={age:[16,90,'years'],height:[130,210,'cm'],weight:[35,200,'kg'],target:[35,200,'kg']};
+const RANGE={logw:[35,200,'kg'],age:[16,90,'years'],height:[130,210,'cm'],weight:[35,200,'kg'],target:[35,200,'kg']};
 function wheel(key){
   const [min,max,unit]=RANGE[key];let items='';
   for(let v=min;v<=max;v++)items+=`<div class="wi ${v===S[key]?'sel':''}" onclick="this.parentNode.scrollTo({top:${(v-min)*36},behavior:'smooth'})">${v}</div>`;
@@ -780,7 +834,7 @@ welcome:()=>`<div class="screen">
     <h1 style="font-size:24px">${L('Create a personalized plan that fits you')}</h1>
     <div class="time-pill">${ic('timer')} ${L('Takes about 1 minute')}</div>
   </div>
-  ${footer('Get started',true,'go(1)',`<button class="ghost">${L('I already have an account')}</button>`)}
+  ${footer('Get started',true,'go(1)',`<button class="ghost" onclick="openSignIn()">${L('I already have an account')}</button>`)}
 </div>`,
 
 goal:()=>`<div class="screen">${topBar('About you')}${prog()}<div class="body center">
@@ -827,7 +881,7 @@ health:()=>{
   <div class="sub">${L('Select all that apply. We’ll adapt your workouts and meals to them.')}</div>
   <div class="group" style="margin-top:22px"><button class="row crow" onclick="toggleHealth('None')"><span>${L('None of these')}</span>${cb(S.health.includes('None'))}</button></div>
   <div class="group">${list.map(rowH).join('')}</div>
-  </div>${footer('Next',S.health.length>0,'go(1)',`<p class="legal">${L('By tapping Next, you agree that Healthy Me may process your health data to personalise your plan. You can withdraw consent anytime in your profile.')} <a href="#" onclick="return false">${L('Privacy Policy')}</a></p>`)}</div>`;
+  </div>${footer('Next',S.health.length>0,'go(1)',`<p class="legal">${L('By tapping Next, you agree that Healthy Me may process your health data to personalise your plan. You can withdraw consent anytime in your profile.')} <a href="#" onclick="openPrivacy();return false">${L('Privacy Policy')}</a></p>`)}</div>`;
 },
 
 include:()=>{
@@ -905,7 +959,7 @@ plan:()=>{
   const tints=['#EFE6DB','#E6EEDA','#F4E6D2','#ECE3EE','#E3EAF0'];
   const week=[0,1,2,3,4].map(n=>{const ts=dayTasks(n),w=ts[0],d=addDays(today,n);
     const lab=n===0?L('Today'):new Intl.DateTimeFormat(loc,{weekday:'short',day:'numeric'}).format(d);
-    return `<div class="wcard"><div class="wc-top" style="background:${tints[n%5]}">${ic('image')}</div><div class="wc-b"><b>${w.title}</b><small>${ts.reduce((a,t)=>a+t.min,0)} ${L('min')}</small></div></div>`;}).join('');
+    return `<div class="wcard tap" onclick="openDayPreview(${n})"><div class="wc-top" style="background:${tints[n%5]}">${ic('image')}</div><div class="wc-b"><b>${w.title}</b><small>${ts.reduce((a,t)=>a+t.min,0)} ${L('min')}</small></div></div>`;}).join('');
   const init=(S.name||'N').trim()[0].toUpperCase();
   return `<div class="screen">${topBar('',false)}<div class="body" style="padding-top:0">
   <div class="prof">
@@ -943,6 +997,8 @@ save:()=>`<div class="screen">${topBar('',false)}<div class="body">
   </div><div class="footer"><button class="ghost" onclick="go(1)">${L('Maybe later')}</button></div></div>`,
 
 home:()=>{
+  if(S.sub&&SUBV[S.sub.v]) return SUBV[S.sub.v]();
+  if((S.tab||'plan')!=='plan') return TABV[S.tab]();
   const day=S.day||0, today=startOfDay(new Date()), sel=addDays(today,day);
   const ws=addDays(sel,-((sel.getDay()+6)%7));
   const loc=LANG==='ua'?'uk-UA':'en-GB';
@@ -954,14 +1010,14 @@ home:()=>{
   const done=tasks.filter(taskDone).length, total=tasks.reduce((a,t)=>a+t.min,0);
   const row=t=>`<div class="lrow tap" onclick="openDetail('${t.id}')"><span class="tile">${ic(t.icon)}</span><span class="tt"><span>${t.title}</span>${t.sub?`<small>${t.sub}</small>`:''}</span>${t.isNew?`<span class="badge">${L('New')}</span>`:''}<span class="trail">${t.min} ${L('min')}</span>${isToday&&taskDone(t)?`<span class="cbx on">${ic('check')}</span>`:`<span class="chev">${ic('chev')}</span>`}</div>`;
   return `<div class="screen">
-  <div class="home-h"><h2>${L('Plan')}</h2><div class="avatar">${(S.name||'N')[0].toUpperCase()}</div></div>
+  ${homeHead(L('Plan'))}
   <div class="week">${strip}</div><div class="week-line"></div>
   <div class="body swipe" style="padding-top:0">
     <div class="sec-h"><span>${isToday?(done===tasks.length?L('Day complete'):L('{d} of {n} done',{d:done,n:tasks.length})):L('Day {n} of your plan',{n:day+1})}</span><span>${L('{m} min total',{m:total})}</span></div>
     <div class="group">${S._skel?tasks.map(()=>`<div class="lrow"><span class="tile sk"></span><span class="tt"><span class="sk sk-l"></span><span class="sk sk-s"></span></span></div>`).join(''):tasks.map(row).join('')}</div>
   </div>
   ${isToday&&done===tasks.length?`<div class="toast">${L('Great start, {n}! Come back tomorrow for day 2.',{n:S.name})}</div>`:''}
-  <div class="tabbar"><div><span>${ic('plan')}</span>${L('Plan')}</div><div><span>${ic('bars')}</span>${L('Progress')}</div><div><span>${ic('play')}</span>${L('Workouts')}</div><div><span>${ic('grid')}</span>${L('More')}</div></div>
+  ${tabbar()}
   </div>`;
 }
 };
@@ -969,10 +1025,10 @@ home:()=>{
 function detailView(t,day){
   const isToday=day===0, left=t.items.filter(i=>!S.done[i.id]).length, all=left===0;
   const sub=t.kind==='wk'?L('{m} min · {k} exercises',{m:t.min,k:t.items.length}):t.min?L('{m} min · {k} steps',{m:t.min,k:t.items.length}):'';
-  const card=it=>`<div class="opt ex ${isToday?'':'off-t'}" ${isToday?`onclick="S.done['${it.id}']=!S.done['${it.id}'];render()"`:''}><div class="ic">${ic(it.icon)}</div><div><div class="t">${it.t}</div>${it.min?`<div class="d">${it.min} ${L('min')}</div>`:''}</div>${isToday?`<span class="cbx ${S.done[it.id]?'on':''}">${S.done[it.id]?ic('check'):''}</span>`:''}</div>`;
+  const card=(it,i)=>`<div class="opt ex ${isToday||t.kind==='feat'?'':'off-t'}" ${isToday||t.kind==='feat'?`onclick="itemTap('${t.id}',${i})"`:''}><div class="ic">${ic(it.icon)}</div><div><div class="t">${it.t}</div>${it.min?`<div class="d">${it.min} ${L('min')}</div>`:''}</div>${isToday?`<span class="cbx ${S.done[it.id]?'on':''}" onclick="toggleDone('${it.id}',event)">${S.done[it.id]?ic('check'):''}</span>`:''}</div>`;
   const cta=!isToday?`<button class="cta" disabled>${L('Opens on day {n}',{n:day+1})}</button>`
     :all?`<button class="cta" onclick="closeDetail()">${L('Done')}</button>`
-    :`<button class="cta" onclick="startNext(this)">${L(t.kind==='wk'?'Start Workout':t.kind==='mind'?'Start Reading':'Start')}</button>`;
+    :`<button class="cta" onclick="startTask('${t.id}')">${L(t.kind==='wk'?'Start Workout':t.kind==='mind'?'Start Reading':'Start')}</button>`;
   return `<div class="screen"><div class="top"><button class="back" onclick="closeDetail()">←</button><div class="title"></div><div style="width:32px"></div></div>
   <div class="body" style="padding-top:8px">
     <h1>${t.title}</h1>${sub?`<div class="sub">${sub}</div>`:''}
@@ -982,11 +1038,21 @@ function detailView(t,day){
 /* ---------- actions ---------- */
 const startOfDay=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x;};
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const EXL={
+  'Full body starter':['Warm-up','Squats','Glute bridge','Push-ups on knees','Cool-down stretch'],
+  'Strength starter':['Warm-up','Squats','Glute bridge','Push-ups on knees','Cool-down stretch'],
+  'Seated upper body':['Seated warm-up','Arm circles','Band rows','Chest press','Seated stretch'],
+  'Adaptive strength':['Warm-up','Core bracing','Single-arm band row','Balance drill','Cool-down stretch'],
+  'Gentle prenatal flow':['Breathing','Cat-cow','Side-lying leg lifts','Pelvic tilts','Relax'],
+  'Mobility & stretch':['Neck & shoulder rolls','Cat-cow','Hip opener','Hamstring stretch'],
+  'Core & balance':['Dead bug','Bird dog','Side plank','Balance hold']
+};
 function split(names,total){const k=names.length,base=Math.max(1,Math.floor(total/k));return names.map((n,i)=>[n,i===k-1?Math.max(1,total-base*(k-1)):base]);}
 function dayTasks(n){
   const wkAlt=['Mobility & stretch','Core & balance'];
   const wk=n%2===0?(S._wk||'Full body starter'):wkAlt[Math.floor(n/2)%2];
-  const EX={
+  const EX=EXL;
+  const _unused={
     'Full body starter':['Warm-up','Squats','Glute bridge','Push-ups on knees','Cool-down stretch'],
     'Strength starter':['Warm-up','Squats','Glute bridge','Push-ups on knees','Cool-down stretch'],
     'Seated upper body':['Seated warm-up','Arm circles','Band rows','Chest press','Seated stretch'],
@@ -999,9 +1065,9 @@ function dayTasks(n){
   const t=[{id:'wk'+n,key:isPreg()?'Gentle prenatal flow':wk,icon:'dumbbell',kind:'wk',title:titleCase(L(wk)),min:S.minutes,items:split(exList,S.minutes).map(([x,m])=>({t:titleCase(L(x)),min:m,icon:'dumbbell'}))}];
   const feats=S.include.filter(x=>x!=='Workouts'&&x!=='Mindset');
   const meta={'Meal plan':['bowl','Today’s recipes',5,['Breakfast','Lunch','Dinner']],'Cycle tracking':['cycle','Log how you feel',2,['Log how you feel']],'Fasting':['timer','Your 12:12 window',1,['Start 12:12 fast']]};
-  feats.forEach((f,k)=>{ if(n>=k+1){const [icon,sub,min,its]=meta[f];t.push({id:f+n,icon,kind:'feat',title:titleCase(L(f)),sub:L(sub),min,isNew:n===k+1,items:its.map(x=>({t:titleCase(L(x)),icon}))});} });
+  feats.forEach((f,k)=>{ if(n>=k+1){const [icon,sub,min,its]=meta[f];t.push({id:f+n,icon,kind:'feat',title:titleCase(L(f)),sub:L(sub),min,isNew:n===k+1,items:its.map(x=>({t:titleCase(L(x)),icon,key:x}))});} });
   const mind=n===0?[['We Know What You’re Thinking',2],['Stop Them Before They Stop You',1]]:[[L('Chapter {c}: part {p}',{c:n+1,p:1}),2],[L('Chapter {c}: part {p}',{c:n+1,p:2}),1]];
-  t.push({id:'mind'+n,icon:'bulb',kind:'mind',title:titleCase(n===0?L('Start with your mind'):L('Mindset · chapter {c}',{c:n+1})),min:3,items:mind.map(([x,m])=>({t:titleCase(L(x)),min:m,icon:'bulb'}))});
+  t.push({id:'mind'+n,icon:'bulb',kind:'mind',title:titleCase(n===0?L('Start with your mind'):L('Mindset · chapter {c}',{c:n+1})),min:3,items:mind.map(([x,m],j)=>({t:titleCase(L(x)),min:m,icon:'bulb',art:n===0?(j?'a2':'a1'):(j?'g2':'g1')}))});
   t.forEach(x=>x.items.forEach((it,i)=>it.id=x.id+':'+i));
   return t;
 }
@@ -1112,12 +1178,242 @@ function showSys(){
   document.getElementById('phone').appendChild(d);
 }
 
+/* ---------- full app: tabs, profile, player, reader, sheets ---------- */
+const TABS=[['plan','plan','Plan'],['progress','bars','Progress'],['workouts','play','Workouts'],['more','grid','More']];
+const tabbar=()=>`<div class="tabbar">${TABS.map(([k,i,t])=>`<div class="${(S.tab||'plan')===k?'on':''}" onclick="setTab('${k}')"><span>${ic(i)}</span>${L(t)}</div>`).join('')}</div>`;
+function setTab(k){ if((S.tab||'plan')===k&&!S.detail)return; const order=TABS.map(t=>t[0]); DIR=order.indexOf(k)>=order.indexOf(S.tab||'plan')?1:-1; S.tab=k; S.detail=null; S.open=null; render(); }
+function openSub(v,extra={}){ DIR=1; S.open=null; S.sub=Object.assign({v},extra); render(); }
+function closeSub(){ DIR=-1; S.open=null; S.sub=null; render(); }
+function toast(msg){ const d=document.createElement('div'); d.className='toast t-temp'; d.textContent=msg; document.getElementById('phone').appendChild(d); setTimeout(()=>d.remove(),2200); }
+const homeHead=(title)=>`<div class="home-h"><h2>${title}</h2><button class="avatar" onclick="openSub('profile')">${(S.name||'N').trim()[0].toUpperCase()}</button></div>`;
+const backBar=(title,fn='closeSub()')=>`<div class="top"><button class="back" onclick="${fn}">←</button><div class="title">${title||''}</div><div style="width:32px"></div></div>`;
+const chev=()=>`<span class="chev">${ic('chev')}</span>`;
+const vrow=(label,val,fn,cls='')=>`<button class="row vrow ${cls}" onclick="${fn}"><span>${label}</span><span class="val">${val}</span>${chev()}</button>`;
+
+/* library workouts */
+function libKeys(){
+  if(S.health.includes('Wheelchair')) return ['Seated upper body'];
+  if(isPreg()) return ['Gentle prenatal flow','Mobility & stretch'];
+  const k=['Full body starter','Strength starter','Mobility & stretch','Core & balance'];
+  if(S.health.includes('Limb loss')) k.unshift('Adaptive strength');
+  return k;
+}
+function libTask(key){ const t={id:'lib-'+key,key,kind:'wk',icon:'dumbbell',title:titleCase(L(key)),min:S.minutes,items:split(EXL[key],S.minutes).map(([x,m])=>({t:titleCase(L(x)),min:m,icon:'dumbbell'}))}; t.items.forEach((it,i)=>it.id=t.id+':'+i); return t; }
+function getTask(id){ return id.startsWith('lib-')?libTask(id.slice(4)):dayTasks(S.day||0).find(x=>x.id===id); }
+
+/* task item actions */
+function itemTap(taskId,i){
+  const t=getTask(taskId), it=t.items[i]; S._pv=(S.day||0)>0&&!taskId.startsWith('lib-')?(S.day||0)+1:0;
+  if(t.kind==='wk') return openPlayer(taskId,i);
+  if(t.kind==='mind') return openReader(taskId,i);
+  if(['Breakfast','Lunch','Dinner'].includes(it.key)) return openRecipe(it);
+  if(it.key==='Log how you feel') return openMood(it);
+  if(it.key==='Start 12:12 fast') return openFast(it);
+}
+function startTask(taskId){ const t=getTask(taskId); const i=Math.max(0,t.items.findIndex(x=>!S.done[x.id])); itemTap(taskId,i); }
+function toggleDone(id,e){ e&&e.stopPropagation(); S.done[id]=!S.done[id]; render(); }
+
+/* workout player */
+function openPlayer(taskId,i){
+  const t=getTask(taskId); if(i==null||i<0) i=Math.max(0,t.items.findIndex(x=>!S.done[x.id]));
+  S.play={task:taskId,i,left:t.items[i].min*60,paused:false,ret:S.sub&&S.sub.v==='wdetail'?S.sub:null};
+  DIR=1; S.sub={v:'player'}; render(); tick();
+}
+function tick(){ clearInterval(S._tick); S._tick=setInterval(()=>{
+  if(!S.play||!S.sub||S.sub.v!=='player'){clearInterval(S._tick);return;}
+  if(S.play.paused)return;
+  S.play.left=Math.max(0,S.play.left-1); paintTimer();
+  if(S.play.left===0) nextEx();
+},1000); }
+function paintTimer(){ const t=getTask(S.play.task), tot=t.items[S.play.i].min*60, el=document.getElementById('tmr'), arc=document.getElementById('tarc');
+  if(el) el.textContent=`${Math.floor(S.play.left/60)}:${String(S.play.left%60).padStart(2,'0')}`;
+  if(arc) arc.style.strokeDashoffset=(1-S.play.left/tot)*603; }
+function nextEx(){ const t=getTask(S.play.task); S.done[t.items[S.play.i].id]=true;
+  if(S.play.i>=t.items.length-1) return finishTask('wk',S.play.task);
+  S.play.i++; S.play.left=t.items[S.play.i].min*60; S.play.paused=false; DIR=1; render(); }
+function prevEx(){ if(S.play.i===0)return; const t=getTask(S.play.task); S.play.i--; S.play.left=t.items[S.play.i].min*60; DIR=-1; render(); }
+function togglePause(){ S.play.paused=!S.play.paused; render(); }
+function askEndWorkout(){ S.play.paused=true; render();
+  openSheet(titleCase(L('End workout?')),`<p class="sheet-text">${L('Completed exercises are saved.')}</p>
+  <button class="cta" style="margin-top:22px" onclick="closeSheet();endPlayer()">${L('End')}</button>
+  <button class="ghost" onclick="closeSheet();S.play.paused=false;render()">${L('Keep Going')}</button>`,false); }
+function endPlayer(){ clearInterval(S._tick); const ret=S.play&&S.play.ret; S.play=null; DIR=-1; S.sub=ret||null; render(); }
+function finishTask(kind,taskId){ clearInterval(S._tick); const t=getTask(taskId); const ret=S.play&&S.play.ret; S.play=null; DIR=1; S.sub={v:'complete',kind,task:taskId,ret}; render(); }
+function playerView(){
+  const t=getTask(S.play.task), it=t.items[S.play.i], n=t.items.length, next=t.items[S.play.i+1];
+  const segs=t.items.map((x,k)=>`<i class="${k<S.play.i||S.done[x.id]?'done':k===S.play.i?'cur':''}"></i>`).join('');
+  return `<div class="screen player">${backBar('', 'askEndWorkout()').replace('←',ic('x'))}
+  <div class="body" style="padding-top:4px">
+    <div class="segs">${segs}</div>
+    <div class="ph pl-img">${ic('image')}</div>
+    <div class="pl-meta">${L('Exercise {i} of {n}',{i:S.play.i+1,n})}</div>
+    <h1>${it.t}</h1>
+    <div class="tring"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="var(--line)" stroke-width="6"/><circle id="tarc" cx="100" cy="100" r="96" fill="none" stroke="var(--dark)" stroke-width="6" stroke-linecap="round" stroke-dasharray="603" stroke-dashoffset="${(1-S.play.left/(it.min*60))*603}" transform="rotate(-90 100 100)"/></svg><span id="tmr">${Math.floor(S.play.left/60)}:${String(S.play.left%60).padStart(2,'0')}</span></div>
+    <div class="pl-ctrl">
+      <button class="pc" onclick="prevEx()" ${S.play.i===0?'disabled':''} aria-label="Previous">${ic('chev').replace('<svg','<svg style="transform:scaleX(-1)"')}</button>
+      <button class="pc big" onclick="togglePause()" aria-label="${S.play.paused?'Play':'Pause'}">${S.play.paused?ic('playf'):ic('pause')}</button>
+      <button class="pc" onclick="nextEx()" aria-label="Next">${ic('chev')}</button>
+    </div>
+    <div class="pl-next">${next?L('Up next: {x}',{x:next.t}):L('Last exercise')}</div>
+  </div></div>`;
+}
+
+/* reader */
+const ART={
+  a1:['Most plans fail not because of the workouts, but because of the thoughts that come before them: “I’m too tired”, “one day won’t matter”, “I’ll start on Monday”.','These thoughts feel like facts, but they are habits of the mind. The first step is simply to notice them when they appear.','Today, try this: when you catch yourself about to skip something, name the thought. You don’t have to fight it. Just see it.'],
+  a2:['Once you can notice a thought, you can answer it. Prepare one short reply in advance, like “Five minutes is enough to start.”','Small starts beat perfect plans. Your workout today is short on purpose, so the reply is always true.'],
+  g1:['Keep noticing the thoughts that hold you back. Each time you act despite them, the next time gets easier.','Think of one moment from yesterday when you followed your plan. What helped you do it?'],
+  g2:['Progress is rarely a straight line. A missed day is information, not failure.','Tomorrow, start with the smallest task on your list and let momentum do the rest.']
+};
+function openReader(taskId,i){ DIR=1; S.sub={v:'reader',task:taskId,i}; render(); }
+function readDone(){ const t=getTask(S.sub.task), it=t.items[S.sub.i]; S.done[it.id]=true;
+  const nx=t.items.findIndex(x=>!S.done[x.id]); if(nx<0) return finishTask('mind',S.sub.task);
+  DIR=1; S.sub={v:'reader',task:S.sub.task,i:nx}; render(); }
+function readerView(){
+  const t=getTask(S.sub.task), it=t.items[S.sub.i];
+  return `<div class="screen">${backBar(L('Part {i} of {n}',{i:S.sub.i+1,n:t.items.length}))}
+  <div class="body article" style="padding-top:8px">
+    <div class="ph art-img">${ic('image')}</div>
+    <div class="pl-meta">${it.min} ${L('min')} · ${titleCase(L('Mindset'))}</div>
+    <h1>${it.t}</h1>
+    ${ART[it.art].map(p=>`<p>${L(p)}</p>`).join('')}
+  </div><div class="footer"><button class="cta" onclick="readDone()">${L(S.done[it.id]?'Next':'Mark as Read')}</button></div></div>`;
+}
+
+/* completion */
+function completeView(){
+  const t=getTask(S.sub.task), wk=S.sub.kind==='wk';
+  const back=S.sub.ret?`S.sub=${JSON.stringify(S.sub.ret).replace(/"/g,"'")};DIR=-1;render()`:`S.detail=null;closeSub()`;
+  return `<div class="screen"><div class="body center" style="text-align:center">
+    <div class="done-ic">${ic('check')}</div>
+    <h1>${titleCase(L(wk?'Workout complete':'Reading complete'))}</h1>
+    <div class="sub">${t.title}</div>
+    <div class="stat3" style="margin-top:24px"><div><small>${L('Time')}</small><b>${t.min}<em>${L('min')}</em></b></div><div><small>${L(wk?'Exercises':'Parts')}</small><b>${t.items.length}</b></div><div><small>${L('Day streak')}</small><b>${streak()}</b></div></div>
+  </div><div class="footer"><button class="cta" onclick="${back}">${L(S.sub.ret?'Done':'Back to Plan')}</button></div></div>`;
+}
+
+/* feature sheets */
+const RECIPES={
+  Breakfast:['Greek yogurt with berries and oats',320,22,10,['Greek yogurt, 200 g','Berries, 80 g','Oats, 30 g','Honey, 1 tsp']],
+  Lunch:['Chicken and quinoa bowl',480,38,20,['Chicken breast, 120 g','Quinoa, 60 g','Cucumber and tomatoes','Olive oil, 1 tsp']],
+  Dinner:['Baked salmon with vegetables',450,34,25,['Salmon fillet, 130 g','Broccoli, 150 g','Carrots, 100 g','Lemon and herbs']]
+};
+function openRecipe(it){ const [name,kcal,prot,mins,ing]=RECIPES[it.key];
+  openSheet(titleCase(L(it.key)),`<div class="ph sheet-img">${ic('image')}</div><h3 class="sh-title">${L(name)}</h3>
+  <p class="sh-meta">${kcal} ${L('kcal')} · ${prot} ${L('g protein')} · ${mins} ${L('min')}</p>
+  <div class="sec-h"><span>${titleCase(L('Ingredients'))}</span></div><div class="group">${ing.map(x=>`<div class="row">${L(x)}</div>`).join('')}</div>
+  ${S._pv?`<button class="cta" style="margin-top:20px" disabled>${L('Opens on day {n}',{n:S._pv})}</button>`:`<button class="cta" style="margin-top:20px" ${S.done[it.id]?'disabled':''} onclick="S.done['${it.id}']=true;closeSheet();render();toast(L('Saved'))">${L(S.done[it.id]?'Eaten':'Mark as Eaten')}</button>`}`,false); }
+function openMood(it){ S._mood=S.mood||null;
+  const chips=()=>['Energetic','Calm','Tired','Low mood','Cramps'].map(m=>`<button class="chip ${S._mood===m?'sel':''}" onclick="S._mood='${m}';this.parentNode.innerHTML=window._moodChips();document.getElementById('moodSave').disabled=false">${L(m)}</button>`).join('');
+  window._moodChips=chips;
+  openSheet(titleCase(L('Cycle tracking')),`<p class="sheet-q">${L('How do you feel today?')}</p><div class="chips">${chips()}</div>
+  ${S._pv?`<button class="cta" style="margin-top:20px" disabled>${L('Opens on day {n}',{n:S._pv})}</button>`:`<button class="cta" id="moodSave" style="margin-top:24px" ${S._mood?'':'disabled'} onclick="S.mood=S._mood;S.done['${it.id}']=true;closeSheet();render();toast(L('Saved'))">${L('Save')}</button>`}`,false); }
+function openFast(it){ const fmt=d=>d.toTimeString().slice(0,5);
+  const st=S.fast?new Date(S.fast):null, now=new Date(), end=new Date((st||now).getTime()+12*36e5);
+  openSheet(titleCase(L('Fasting')),`<div class="tring sm"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="var(--line)" stroke-width="8"/><circle cx="100" cy="100" r="96" fill="none" stroke="var(--dark)" stroke-width="8" stroke-linecap="round" stroke-dasharray="603" stroke-dashoffset="${st?603*(1-Math.min(1,(now-st)/432e5)):603}" transform="rotate(-90 100 100)"/></svg><span>12:12</span></div>
+  <p class="sheet-text">${st?L('Fasting started at {a}, ends at {b}',{a:fmt(st),b:fmt(end)}):L('Starts now, ends at {t}',{t:fmt(end)})}</p>
+  ${S._pv?`<button class="cta" style="margin-top:20px" disabled>${L('Opens on day {n}',{n:S._pv})}</button>`:`<button class="cta" style="margin-top:22px" ${st?'disabled':''} onclick="S.fast=Date.now();S.done['${it.id}']=true;closeSheet();render();toast(L('Saved'))">${L(st?'Fasting in progress':'Start Fast')}</button>`}`,false); }
+
+/* week-card preview on the plan screen */
+function openDayPreview(n){ const t=dayTasks(n)[0];
+  openSheet(t.title,`<p class="sheet-q">${L('{m} min · {k} exercises',{m:t.min,k:t.items.length})}</p><div class="group">${t.items.map(x=>`<div class="row"><span>${x.t}</span><span class="val">${x.min} ${L('min')}</span></div>`).join('')}</div>`,false); }
+
+/* privacy, help, language, reminders, sign in, log out */
+function openPrivacy(){ openSheet(titleCase(L('Privacy & data')),`<p class="sheet-text">${L('Your health data is used only to personalise your plan. We never sell it or use it for advertising.')}</p><p class="sheet-text">${L('You can withdraw consent or delete your data anytime in Profile.')}</p><button class="ghost" style="margin-top:20px" onclick="closeSheet()">${L('Got It')}</button>`,false); }
+function openHelp(){ openSheet(titleCase(L('Help')),`<p class="sheet-text">${L('Questions about your plan or the app? Our team replies within 24 hours.')}</p><button class="cta" style="margin-top:22px" onclick="btnLoad(this,()=>{closeSheet();toast(L('Message sent. We’ll reply soon.'))})">${L('Contact Support')}</button>`,false); }
+function openLang(){ openSheet(titleCase(L('Language')),`<div class="group">${[['en','English'],['ua','Українська']].map(([k,n])=>`<button class="row vrow" onclick="closeSheet();setLang('${k}')"><span>${n}</span>${LANG===k?`<span class="cbx on">${ic('check')}</span>`:''}</button>`).join('')}</div>`,false); }
+function openReminders(){ openSheet(titleCase(L('Reminders')),`<div class="group">${[['08:00','Morning'],['13:00','Lunch'],['19:00','Evening'],[null,'Off']].map(([t,l])=>`<button class="row vrow" onclick="S.notif=${t?`'${t}'`:'null'};closeSheet();render()"><span>${t?t+' · ':''}${L(l)}</span>${(S.notif||null)===t?`<span class="cbx on">${ic('check')}</span>`:''}</button>`).join('')}</div>`,false); }
+function openSignIn(){ openSheet(titleCase(L('Welcome back')),`<p class="sheet-text">${L('Sign in to continue your plan.')}</p><div class="auth"><button class="apple" onclick="btnLoad(this,demoSignIn)">${ic('apple')} ${L('Continue with Apple')}</button><button class="mail" onclick="btnLoad(this,demoSignIn)">${ic('mail')} ${L('Continue with email')}</button></div>`,false); }
+function demoSignIn(){ closeSheet(); Object.assign(S,{name:'Anna',goal:'Keep fit',health:['None'],include:['Workouts','Meal plan','Mindset'],minutes:10,_wk:'Full body starter',tab:'plan',sub:null,detail:null,day:0}); DIR=1; curKey='home'; render(); }
+function askLogOut(){ openSheet(titleCase(L('Log out?')),`<p class="sheet-text">${L('Your plan and progress stay saved in your account.')}</p><button class="cta" style="margin-top:22px" onclick="closeSheet();DIR=-1;restart()">${L('Log Out')}</button><button class="ghost" onclick="closeSheet()">${L('Cancel')}</button>`,false); }
+
+/* profile edit sheets */
+const GOALS=[['flame','Lose weight'],['dumbbell','Build muscle'],['sparkle','Keep fit'],['heart','Find self-love']];
+function openGoal(){ openSheet(titleCase(L('Goal')),`<div class="group">${GOALS.map(([i,g])=>`<button class="row vrow" onclick="S.goal='${g}';closeSheet();render();toast(L('Plan updated'))"><span class="rl-i">${ic(i)}${L(g)}</span>${S.goal===g?`<span class="cbx on">${ic('check')}</span>`:''}</button>`).join('')}</div>`,false); }
+function openTime(){ openSheet(titleCase(L('Time per day')),`<div class="group">${[5,10,15,20].map(m=>`<button class="row vrow" onclick="S.minutes=${m};closeSheet();render();toast(L('Plan updated'))"><span>${m} ${L('min')}</span>${S.minutes===m?`<span class="cbx on">${ic('check')}</span>`:''}</button>`).join('')}</div>`,false); }
+function openName(){ openSheet(titleCase(L('Name')),`<input class="textin" id="nm2" value="${S.name||''}" style="margin-top:8px" autocomplete="off"><button class="cta" style="margin-top:24px" onclick="const v=document.getElementById('nm2').value.trim();if(v){S.name=v;closeSheet();render()}">${L('Save')}</button>`,false); setTimeout(()=>document.getElementById('nm2')?.focus(),350); }
+function hsBody(){
+  const list=['Sensitive back','Sensitive knees','Diabetes','Pregnancy','Wheelchair','Limb loss'];
+  const cb=on=>`<span class="cbx ${on?'on':''}">${on?ic('check'):''}</span>`;
+  return `<div class="group"><button class="row crow" onclick="hsTap('None')"><span>${L('None of these')}</span>${cb(S.health.includes('None'))}</button></div>
+  <div class="group">${list.map(id=>{const st=followState(id),on=st?st.on:S.health.includes(id);return `<button class="row crow" onclick="hsTap('${id}')"><span class="rl"><span>${L(id)}</span>${st&&st.sub?`<small>${st.sub}</small>`:''}</span>${cb(on)}</button>`;}).join('')}</div>`;
+}
+function hsTap(id){
+  if(FOLLOW[id]&&!followState(id).on){ closeSheet(); return setTimeout(()=>openFollow(id),320); }
+  if(FOLLOW[id]) clearFollow(id); else toggleHealth(id);
+  const b=document.querySelector('.sheet-body'); if(b) b.innerHTML=hsBody();
+}
+function openHealthEdit(){ openSheet(titleCase(L('Health conditions')),hsBody(),true); }
+function openLogWeight(){ S.logw=S.weight; openSheet(titleCase(L('Log Weight')),`<div class="group">${wheel('logw')}</div><button class="cta" style="margin-top:22px" onclick="S.weight=S.logw;(S.wlog=S.wlog||[]).push(S.logw);closeSheet();render();toast(L('Weight saved'))">${L('Save')}</button>`,false); requestAnimationFrame(initWheels); }
+const streak=()=>{let n=0;for(let d=0;d<28;d++){const ts=dayTasks(d);if(ts.every(taskDone))n++;else break;}return n;};
+
+/* tab views */
+function progressView(){
+  if(!S.wlog) S.wlog=[S.weight];
+  let mins=0,wks=0; for(let d=0;d<7;d++){const t=dayTasks(d)[0]; t.items.forEach(x=>{if(S.done[x.id])mins+=x.min}); if(taskDone(t))wks++;}
+  libKeys().forEach(k=>{const t=libTask(k); t.items.forEach(x=>{if(S.done[x.id])mins+=x.min}); if(taskDone(t))wks++;});
+  const pts=S.wlog, lose=S.goal==='Lose weight'&&!isPreg(), all=[...pts,...(lose?[S.target]:[])], lo=Math.min(...all)-1, hi=Math.max(...all)+1;
+  const X=i=>pts.length<2?150:20+i*(260/(pts.length-1)), Y=w=>80-((w-lo)/(hi-lo))*64;
+  const line=pts.map((w,i)=>`${X(i)},${Y(w)}`).join(' ');
+  const chart=`<svg viewBox="0 0 300 96" class="wchart">${lose?`<line x1="10" x2="290" y1="${Y(S.target)}" y2="${Y(S.target)}" stroke="var(--green)" stroke-dasharray="4 4"/><text x="290" y="${Y(S.target)-5}" text-anchor="end" class="wc-l">${L('Goal')} ${S.target}</text>`:''}${pts.length>1?`<polyline points="${line}" fill="none" stroke="var(--dark)" stroke-width="2.5" stroke-linejoin="round"/>`:''}${pts.map((w,i)=>`<circle cx="${X(i)}" cy="${Y(w)}" r="${i===pts.length-1?5:3}" fill="var(--dark)"/>`).join('')}</svg>`;
+  const b=bmi(S.weight,S.height).toFixed(1), ok=b>=18.5&&b<25;
+  const letters=LANG==='ua'?['П','В','С','Ч','П','С','Н']:['M','T','W','T','F','S','S'], today=startOfDay(new Date()), dow=(today.getDay()+6)%7;
+  const dots=letters.map((l,k)=>{const off=k-dow, on=off>=0&&off<7&&dayTasks(off).every(taskDone);return `<span class="sd ${on?'on':''} ${off===0?'now':''}"><i>${on?ic('check'):''}</i><small>${l}</small></span>`;}).join('');
+  return `<div class="screen">${homeHead(L('Progress'))}<div class="body" style="padding-top:8px">
+    <div class="stat3"><div><small>${L('Day streak')}</small><b>${streak()}</b></div><div><small>${L('Workouts')}</small><b>${wks}</b></div><div><small>${L('Minutes')}</small><b>${mins}</b></div></div>
+    <div class="sec-h"><span>${titleCase(L('This week'))}</span></div><div class="group sdots">${dots}</div>
+    <div class="sec-h"><span>${L('Weight')}</span><span>${S.weight} ${L('kg')}</span></div>
+    <div class="group wcard-p">${chart}${pts.length<2?`<p class="w-hint">${L('Log your weight weekly to see the trend.')}</p>`:''}<button class="row vrow" onclick="openLogWeight()"><span>${L('Log Weight')}</span>${chev()}</button></div>
+    <div class="group" style="margin-top:20px"><button class="row" onclick="openBmiSheet()"><span>${L('BMI')}</span><span class="val bmi-val">${b}<span class="bmi-ic ${ok?'ok':'warn'}">${ic(ok?'checkCircle':'alertCircle')}</span></span></button></div>
+  </div>${tabbar()}</div>`;
+}
+function workoutsView(){
+  const keys=libKeys(), mine=S._wk&&EXL[S._wk]&&keys.includes(S._wk)?S._wk:keys[0];
+  const tints=['#EFE6DB','#E6EEDA','#F4E6D2','#ECE3EE','#E3EAF0'];
+  const card=(k,i)=>`<button class="wcard" onclick="openSub('wdetail',{key:'${k}'})"><div class="wc-top ph" style="background:${tints[i%5]}">${ic('image')}</div><div class="wc-b"><b>${titleCase(L(k))}</b><small>${S.minutes} ${L('min')}</small></div></button>`;
+  return `<div class="screen">${homeHead(L('Workouts'))}<div class="body" style="padding-top:8px">
+    <div class="sec-h"><span>${titleCase(L('For you'))}</span></div>
+    <div class="hscroll">${[mine,...keys.filter(k=>k!==mine)].slice(0,3).map(card).join('')}</div>
+    <div class="sec-h"><span>${titleCase(L('All workouts'))}</span></div>
+    <div class="group">${keys.map(k=>{const t=libTask(k);return `<div class="lrow tap" onclick="openSub('wdetail',{key:'${k}'})"><span class="tile">${ic('dumbbell')}</span><span class="tt"><span>${t.title}</span><small>${L('{m} min · {k} exercises',{m:t.min,k:t.items.length})}</small></span>${taskDone(t)?`<span class="cbx on">${ic('check')}</span>`:chev()}</div>`;}).join('')}</div>
+  </div>${tabbar()}</div>`;
+}
+function moreView(){
+  return `<div class="screen">${homeHead(L('More'))}<div class="body" style="padding-top:8px">
+    <div class="group"><div class="lrow tap" onclick="openSub('profile')"><span class="avatar">${(S.name||'N').trim()[0].toUpperCase()}</span><span class="tt"><span>${S.name||''}</span><small>${L('View profile')}</small></span>${chev()}</div></div>
+    <div class="group" style="margin-top:20px">${vrow(L('Reminders'),S.notif||L('Off'),'openReminders()')}${vrow(L('Language'),LANG==='ua'?'Українська':'English','openLang()')}</div>
+    <div class="group" style="margin-top:20px">${vrow(L('Privacy & data'),'','openPrivacy()')}${vrow(L('Help'),'','openHelp()')}</div>
+    <div class="group" style="margin-top:20px"><button class="row danger" onclick="askLogOut()">${L('Log Out')}</button></div>
+  </div>${tabbar()}</div>`;
+}
+function profileView(){
+  const hs=S.health.filter(h=>h!=='None');
+  const hv=hs.length?hs.length+'':L('None');
+  return `<div class="screen">${backBar(L('Profile'))}<div class="body" style="padding-top:0">
+    <div class="prof"><div class="av-lg"><span>${(S.name||'N').trim()[0].toUpperCase()}</span></div><h1>${S.name||''}</h1></div>
+    <div class="group" style="margin-top:20px">${vrow(L('Name'),S.name||'','openName()')}${vrow(L('Goal'),titleCase(L(S.goal||'Keep fit')),'openGoal()')}${vrow(L('Time per day'),S.minutes+' '+L('min'),'openTime()')}</div>
+    <div class="group">${row('age','Age')}${row('height','Height')}${row('weight','Weight')}</div>
+    <div class="group" style="margin-top:20px">${vrow(L('Health conditions'),hv,'openHealthEdit()')}${vrow(L('Reminders'),S.notif||L('Off'),'openReminders()')}</div>
+  </div></div>`;
+}
+function wdetailView(){
+  const t=libTask(S.sub.key);
+  return `<div class="screen">${backBar('')}<div class="body" style="padding-top:8px">
+    <div class="ph pl-img">${ic('image')}</div>
+    <h1>${t.title}</h1><div class="sub">${L('{m} min · {k} exercises',{m:t.min,k:t.items.length})}</div>
+    <div class="opts">${t.items.map((it,i)=>`<div class="opt ex" onclick="openPlayer('${t.id}',${i})"><div class="ic">${ic('dumbbell')}</div><div><div class="t">${it.t}</div><div class="d">${it.min} ${L('min')}</div></div>${S.done[it.id]?`<span class="cbx on">${ic('check')}</span>`:chev()}</div>`).join('')}</div>
+  </div><div class="footer"><button class="cta" onclick="openPlayer('${t.id}')">${L('Start Workout')}</button></div></div>`;
+}
+const SUBV={player:playerView,reader:readerView,complete:completeView,profile:profileView,wdetail:wdetailView};
+const TABV={progress:progressView,workouts:workoutsView,more:moreView};
+const viewKey=k=>k!=='home'?k:'home/'+(S.sub?S.sub.v+(S.sub.v==='player'&&S.play?S.play.i:S.sub.v==='reader'?S.sub.i:''):(S.tab||'plan')+(S.detail?'/'+S.detail:''));
+
 /* ---------- render ---------- */
 function render(){
   const k=cur();
   // loading screen restarts its timer on render; don't re-render it mid-animation for a language switch
   const app=document.getElementById('app');
-  const vk=k+(k==='home'&&S.detail?'/'+S.detail:'');
+  const vk=viewKey(k);
   const same=app.dataset.k===vk;
   const y=same?(app.querySelector('.body')?.scrollTop||0):0;
   if(!(k==='loading'&&document.getElementById('pct'))){
